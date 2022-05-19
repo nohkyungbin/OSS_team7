@@ -9,6 +9,14 @@ body {
   font-family: arial black;
 }
 
+header {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 150px;
+    margin-right: 150px;
+}
 .circle {
   width: 200px;
   height: 200px;
@@ -17,8 +25,6 @@ body {
   font-size: 20px;
   text-align: center;
   line-height: 200px;
-  float: left;
-  margin-left: 320px;
 }
 
 .login{
@@ -36,15 +42,13 @@ body {
   font-size: 20px;
   text-align: center;
   line-height: 200px;
-  float: left;
-  margin-left: 320px;
 }
 
 #certi {
   width: 1fr;
   height: 1fr;
   background-color: #99FF99;
-  margin-top: 350px;
+  margin-top: 50px;
   text-align: center;
 }
 
@@ -53,16 +57,17 @@ body {
   height: 1fr;
   background-color: #99FF99;
   font-size: 50px;
-  margin-top: 400px;
-  margin-left: 450px;
+  margin-top: 100px;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .main {
   width: 1fr;
   height: 1fr;
   background-color: #99FF99;
-  margin-top: 300px;
+  margin-top: 50px;
   text-align: center;
 }
 
@@ -70,7 +75,7 @@ body {
   width: 1fr;
   height: 1fr;
   background-color: #99FF99;
-  margin-top: 100px;
+  margin-top: 50px;
   text-align: center;
 }
 
