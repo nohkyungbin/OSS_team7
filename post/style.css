@@ -1,0 +1,25 @@
+.head {
+    background-color: lightgray; 
+    display: flex; 
+    flex-direction: row; 
+    padding: 20px;
+}
+
+.webname {
+    width: 90%; 
+    text-align: center;
+}
+
+.profile {
+    border-radius: 30px; 
+    display: flex; 
+    flex-direction: row; 
+    align-items: center;
+}
+
+.profile-info {
+    font-size: 20px;
+}
+.row {
+    padding-left: 10px;
+}
