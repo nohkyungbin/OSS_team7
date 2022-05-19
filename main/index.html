@@ -15,17 +15,17 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="d-flex flex-row head">
+        <div class="d-flex flex-row p-2 bg-dark">
             <!-- Web Page Name -->
-            <div class="d-flex flex-row webname">
+            <button type="button" class="btn btn-dark p-0 me-2 d-flex flex-row rounded webname">
                 <img src="../statics/piggy-coin.png" alt="This is a image of piggy-coin" width="150" height="150"/>
                 <div>
                     <h1>GGH</h1>
                     <div>Gong-Gu-Hae</div>
                 </div>
-            </div>
+            </button>
             <!-- My Profile -->
-            <button type="button" class="btn btn-success d-flex flex-row profile">
+            <button type="button" class="btn btn-success d-flex flex-row align-items-center rounded-pill">
                 <img src="../statics/person.png" alt="This is a image of person" width="100"/>
                 <div class="profile-info">
                     <!-- My ID -->
@@ -37,60 +37,83 @@
         </div>
         <!-- Category -->
         <nav>
-            <div class="nav nav-tabs bg-light" id="nav-tab" role="tablist">
-                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">식품</button>
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">의류</button>
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">민채</button>
+            <div class="nav nav-tabs bg-dark" id="nav-tab" role="tablist">
+                <button class="nav-link active" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">식품</button>
+                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">의류</button>
+                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">생활용품</button>
             </div>
         </nav>
     </header>
     <!-- Body -->
     <div>
         <!-- Posting Box-->
-        <div class="posting">
-            <nav class="navbar bg-light posting-title">
+        <div class="border rounded m-4 p-2 shadow">
+            <!-- Posting header  -->
+            <nav class="navbar bg-light mb-2 rounded">
                 <div class="container-fluid">
                     <!-- Posting Title -->
-                    <a class="navbar-brand">게시글</a>
-                    <form class="d-flex" style="align-items: center;">
+                    <a class="navbar-brand fs-3">게시글</a>
+                    <form class="d-flex align-items-center">
                         <!-- Writer Name --> 
-                        <div class="posting-writer">abcdefg</div>
+                        <div class="me-4">abcdefg</div>
                         <!-- Report Button -->
                         <button id="btn-report" type="button" class="btn btn-outline-danger"><i class="bi bi-bell"></i> Report</button>
                     </form>
                 </div>
-              </nav>
+            </nav>
+            <!-- Posting body -->
             <div>
-                <div class="posting-content">
-                    <!-- Item -->
-                    <div class="content-info">
-                        <p>기한 : 2022년 12월 31일 11:59분 까지</p>
-                        <p>물건 : 돼지고기</p>
-                        <p>사이트 : <span><a href="http://browse.gmarket.co.kr/list?category=200001217">gmarket</a></span></p>
-                        <div class="site-info">
-                            <img src="../statics/pork.jpeg" alt="Pork image" height="100%">
-                        </div>
-                        <p>장소 : 성균관대 학술정보관 5층 </p>
-                        <p>시간 : 성균관대/ 2023년 1월 1일 12시 30분</p>
+                <div class="d-flex flex-row">
+                    <!-- Item info -->
+                    <div class="w-100 p-4 content-info">
+                        <form>
+                            <div class="row mb-3">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">기한</label>
+                                <div class="col-sm-10 d-flex align-items-center"> ~ <span>2022년 12월 31일 11:59분</span> 까지 </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">물건</label>
+                                <div class="col-sm-10 d-flex align-items-center"> 돼지고기 </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">거래 시간</label>
+                                <div class="col-sm-10 d-flex align-items-center"> 2023년 1월 1일 12시 30분</div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">거래 장소</label>
+                                <div class="col-sm-10 d-flex align-items-center"> 성균관대 학술정보관 5층 </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">사이트</label>
+                                <div class="col-sm-10 d-flex align-items-center">
+                                    <a href="http://browse.gmarket.co.kr/list?category=200001217">http://browse.gmarket.co.kr/list?category=200001217</a>
+                                </div>
+                            </div>
+                            <div>
+                                <img class="me-4" src="../statics/pork.jpeg" height="200px" />
+                                <img src="../statics/pork2.jpeg" height="200px" />
+                            </div>
+                        </form>
                     </div>
-                    <div class="content-coin">
-                        <p><span>2</span>/ 4명</p>
+                    <!-- Buying information  -->
+                    <div class="d-flex flex-column align-items-center p-2">
+                        <p><span id="buy-people">0</span> / <span id="max-people">4</span>명</p>
                         <!-- Piggy Bank -->
-                        <div class="pig">
-                            <div class="pig-coin"></div>
+                        <div class="d-flex flex-column-reverse pig">
+                            <div id="pig-coin" class="w-100"></div>
                             <img src="../statics/piggy-coin-empty.png" alt="This is a image of piggy-coin-empty" width="100%" height="100%" style="position: absolute; top: 0"/>
                         </div>
-                        <button type="button" class="btn btn-warning"> 살래요! </button>
+                        <button id="btn-buy" type="button" class="btn btn-warning mt-2"> 살래요! </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Footer -->
-    <footer style="background-color: gray;">
-        <div style="text-align: center; padding: 30px; font-size: large;">
-            <a href="https://github.com/nohkyungbin/OSS_team7" style="color: white;">
-                <i class="bi bi-github"></i> OSS_team7
+    <footer>
+        <div class="bg-secondary d-flex justify-content-center h-100 p-4 m-0">
+            <a href="https://github.com/nohkyungbin/OSS_team7" class="text-white text-uppercase text-decoration-none">
+                <i class="bi bi-github"></i> OSS team7
             </a>
         </div>
     </footer>
@@ -100,10 +123,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
     <script>
-        const btn_report = document.querySelector("#btn-report")
+        const btn_report = document.querySelector("#btn-report");
         btn_report.addEventListener('click', () => {
-            alert("신고 접수 되었습니다!");
-        })
+            alert("🚨 신고 접수 되었습니다! 🚨");
+        });
+
+        const btn_buy = document.querySelector('#btn-buy');
+        let pig_coin = document.querySelector('#pig-coin');
+        const max_people = Number(document.querySelector('#max-people').innerText);
+        btn_buy.addEventListener('click', () => {
+            let people = document.querySelector('#buy-people');
+            if(Number(people.innerText) == max_people){
+                alert("인원모집이 완료되어 신청할 수 없습니다 ☹️");
+                return;
+            }
+            
+            people.innerText = Number(people.innerText) + 1;
+            pig_coin.style.height = String(Number(people.innerText) / max_people * 100) + "%";
+
+        });
+
+
     </script>
 </body>
 </html>
