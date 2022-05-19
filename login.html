@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="OSS.css" type = 'text/css'>
+    <title>로그인</title>
+    <script type="text/javascript">
+        function login(){
+            var loginForm = document.loginForm;
+            var userId = loginForm.userId.value;
+            var password = loginForm.password.value;
+
+            if(!userId || !password){
+                alert("아이디와 비밀번호를 모두 입력해주세요.")
+                return false;
+            }else{
+                return true;
+            }
+        }
+    </script>
+</head>
+<body>
+  <header>
+    <h1 class="login">로그인</h1>
+  </header>
+    <form onsubmit="return login()" name="loginForm" action="home.html" method="post">
+      <div class="mainlogin">
+        <br>
+        아이디:  <input type="text" name="userId"><br><br>
+        비밀번호:  <input type="password" name="password"><br><br>
+        <br><br>
+        처음이신가요?
+        <a href="certi.html">회원가입</a>
+      </div>
+
+      <button type="submit" class="button" name="button">로그인</button>
+    </form>
+</body>
+</html>

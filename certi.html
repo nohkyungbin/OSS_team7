@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="OSS.css" type = 'text/css'>
+    <title>회원가입</title>
+    <script language="javascript">
+
+           function checkz()
+          {
+              // event.preventDefault();
+
+              var numtext = document.getElementById("phone");
+              var nametext = document.getElementById("name");
+              var comtext = document.getElementById("com");
+
+
+
+              var phone = numtext.value;
+              var name = nametext.value;
+              var com = comtext.value;
+
+
+
+              var regExp1 = /^[0-9]{11}$/;
+              var regname = /^[가-힝]{2,}$/;
+
+              if (!regname.test(nametext.value))
+              {
+                  alert("이름을 올바르게 입력해주세요.");
+                  nametext.value = "";
+                  nametext.focus();
+                  return false;
+              }if(!regExp1.test(numtext.value))
+              {
+                alert("전화번호를 올바르게 입력해주세요.");
+                numtext.value = "";
+                numtext.focus();
+                return false;
+              }if(comtext.value == "선택")
+              {
+                alert("통신사를 선택해주세요.");
+                return false;
+              }
+          return true;
+         }
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1 align = "center">회원가입</h1>
+      <span class="circle" id="now">
+        1. 본인인증
+      </span>
+      <span class="circle">
+        2. 정보입력
+      </span>
+      <span class="circle">
+        3. 가입완료
+      </span>
+    </header>
+    <form onsubmit="return checkz()" action="input.html" method="post" enctype="text/plain">
+
+      <div class="main" id="certi">
+        <br>
+        이름:
+        <input type="text" name="name" id="name">
+        <br><br>
+        전화번호:
+        <input type="text" name="phone" id="phone">
+        <br><br>
+        통신사:
+        <select id="com">
+          <option selected>선택</option>
+          <option>SKT</option>
+          <option>KT</option>
+          <option>LG U+</option>
+          <option>SKT 알뜰폰</option>
+          <option>KT 알뜰폰</option>
+          <option>LG U+ 알뜰폰</option>
+        </select>
+        <br><br>
+      </div>
+
+      <button type="submit" class="button" name="button">다음 단계 →</button>
+
+  </form>
+  </body>
+</html>
