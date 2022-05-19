@@ -1,0 +1,65 @@
+.head {
+    background-color: lightgray; 
+    display: flex; 
+    flex-direction: row; 
+    padding: 20px;
+}
+
+.webname {
+    width: 90%; 
+    text-align: center;
+}
+
+.profile {
+    border-radius: 30px; 
+    display: flex; 
+    flex-direction: row; 
+    align-items: center;
+}
+
+.profile-info {
+    font-size: 20px;
+}
+
+.posting {
+    margin: 10px; 
+    border: 2px solid black;
+}
+
+.posting-writer {
+    margin-right: 10px;
+}
+
+.posting-content {
+    display: flex; 
+    flex-direction: row;
+}
+
+.content-info {
+    width: 100%; 
+    height: 500px; 
+    background-color: beige;
+    padding: 20px;
+}
+
+.site-info {
+    width: 80%;
+    height: 300px;
+    background-color: lavender;
+}
+
+
+.pig {
+    width: 800px; 
+    height: 500px; 
+    position: relative; 
+    display: flex; 
+    flex-direction: column-reverse;
+}
+
+.pig-coin {
+    width: 100%; 
+    height: 50%; 
+    background-color: gold; 
+    position: absolute;
+}
