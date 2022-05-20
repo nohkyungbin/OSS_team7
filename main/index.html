@@ -68,7 +68,9 @@
                 <button class="nav-link active" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">전체</button>
                 <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">식품</button>
                 <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">의류</button>
+                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">도서</button>
                 <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">생활용품</button>
+                <!-- Writing button -->
                 <div class="d-flex flex-row-reverse flex-grow-1">
                     <button class="btn btn-secondary me-2 mb-2" type="button"><i class="bi bi-pencil-fill"></i></button>
                 </div>
@@ -76,7 +78,7 @@
         </nav>
     </header>
     <!-- Body -->
-    <div>
+    <div id="container">
         <!-- Posting Box-->
         <div class="border rounded m-4 p-2 shadow">
             <!-- Posting header  -->
@@ -88,7 +90,7 @@
                         <!-- Writer Name --> 
                         <div class="me-4">abcdefg</div>
                         <!-- Report Button -->
-                        <button id="btn-report" type="button" class="btn btn-outline-danger"><i class="bi bi-bell"></i> Report</button>
+                        <button type="button" class="btn btn-outline-danger btn-report"><i class="bi bi-bell"></i> Report</button>
                     </form>
                 </div>
             </nav>
@@ -103,7 +105,7 @@
                                 <div class="col-sm-10 d-flex align-items-center"> ~ <span>2022년 12월 31일 11:59분</span> 까지 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputEmail3" class="col-sm-2 col-form-label">물건</label>
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">상품명</label>
                                 <div class="col-sm-10 d-flex align-items-center"> 돼지고기 </div>
                             </div>
                             <div class="row mb-3">
@@ -120,21 +122,17 @@
                                     <a href="http://browse.gmarket.co.kr/list?category=200001217">http://browse.gmarket.co.kr/list?category=200001217</a>
                                 </div>
                             </div>
-                            <div>
-                                <img class="me-4" src="../statics/pork.jpeg" height="200px" />
-                                <img src="../statics/pork2.jpeg" height="200px" />
-                            </div>
                         </form>
                     </div>
                     <!-- Buying information  -->
                     <div class="d-flex flex-column align-items-center">
-                        <p class="mt-3"><span id="buy-people">0</span> / <span id="max-people">4</span>명</p>
+                        <p class="mt-3"><span id="buy-people-">0</span> / <span id="max-people-">10</span>명</p>
                         <!-- Piggy Bank -->
                         <div class="d-flex flex-column-reverse pig mb-4">
-                            <div id="pig-coin" class="w-100"></div>
+                            <div id="pig-coin-" class="pig-coin w-100"></div>
                             <img src="../statics/piggy-coin-empty.png" alt="This is a image of piggy-coin-empty" width="100%" height="100%" style="position: absolute; top: 0"/>
                         </div>
-                        <button id="btn-buy" type="button" class="btn btn-warning"> 살래요! </button>
+                        <button id="btn-buy-" type="button" class="btn btn-warning"> 살래요! </button>
                     </div>
                 </div>
             </div>
@@ -154,26 +152,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
     <script>
-        // Report button
-        const btn_report = document.querySelector("#btn-report");
-        btn_report.addEventListener('click', () => {
-            alert("🚨 신고 접수 되었습니다! 🚨");
-        });
-
         // Put coin into piggy bank
-        const btn_buy = document.querySelector('#btn-buy');
-        let pig_coin = document.querySelector('#pig-coin');
-        const max_people = Number(document.querySelector('#max-people').innerText);
-        btn_buy.addEventListener('click', () => {
-            let people = document.querySelector('#buy-people');
-            if(Number(people.innerText) == max_people){
-                alert("인원모집이 완료되어 신청할 수 없습니다 ☹️");
-                return;
-            }
-            people.innerText = Number(people.innerText) + 1;
-            pig_coin.style.height = String(Number(people.innerText) / max_people * 100) + "%";
+        function applyforbuy(idx) {
+            const btn_buy = document.querySelector("#btn-buy-"+idx);
+            let pig_coin = document.querySelector("#pig-coin-"+idx);
+            const max_people = Number(document.querySelector("#max-people-"+idx).innerText);
+            btn_buy.addEventListener('click', () => {
+                let people = document.querySelector("#buy-people-"+idx);
+                if(Number(people.innerText) == max_people){
+                    alert("인원모집이 완료되어 신청할 수 없습니다 ☹️");
+                    return;
+                }
+                people.innerText = Number(people.innerText) + 1;
+                pig_coin.style.height = String(Number(people.innerText) / max_people * 100) + "%";
+                console.log(pig_coin.className);
 
-        });
+            });
+        }
+
 
         // Charge points
         const btn_charge = document.querySelector('#btn-charge');
@@ -183,6 +179,79 @@
             points.innerText = Number(points.innerText) + Number(charge.value);
             charge.value = '';
         })
+
+        // Posting box
+        function postingbox(idx, title, writer, deadline, item, time, location, site, appliant, max) {
+            return "<div class='border rounded m-4 p-2 shadow'>\
+                        <nav class='navbar bg-light mb-2 rounded'>\
+                            <div class='container-fluid'>\
+                                <a class='navbar-brand fs-3'>"+title+"</a>\
+                                <form class='d-flex align-items-center'>\
+                                    <div class='me-4'>"+writer+"</div>\
+                                    <button type='button' class='btn btn-outline-danger btn-report'><i class='bi bi-bell'></i> Report</button>\
+                                </form>\
+                            </div>\
+                        </nav>\
+                        <div>\
+                            <div class='d-flex flex-row'>\
+                                <div class='w-100 p-4 content-info'>\
+                                    <form>\
+                                        <div class='row mb-3'>\
+                                            <label for='inputEmail3' class='col-sm-2 col-form-label'>기한</label>\
+                                            <div class='col-sm-10 d-flex align-items-center'> ~ <span>"+deadline+"</span> 까지 </div>\
+                                        </div>\
+                                        <div class='row mb-3'>\
+                                            <label for='inputEmail3' class='col-sm-2 col-form-label'>상품명</label>\
+                                            <div class='col-sm-10 d-flex align-items-center'>"+item+"</div>\
+                                        </div>\
+                                        <div class='row mb-3'>\
+                                            <label for='inputEmail3' class='col-sm-2 col-form-label'>거래 시간</label>\
+                                            <div class='col-sm-10 d-flex align-items-center'>"+time+"</div>\
+                                        </div>\
+                                        <div class='row mb-3'>\
+                                            <label for='inputEmail3' class='col-sm-2 col-form-label'>거래 장소</label>\
+                                            <div class='col-sm-10 d-flex align-items-center'>"+location+"</div>\
+                                        </div>\
+                                        <div class='row mb-3'>\
+                                            <label for='inputEmail3' class='col-sm-2 col-form-label'>사이트</label>\
+                                            <div class='col-sm-10 d-flex align-items-center'>\
+                                                <a href='"+site+"'>"+site+"</a>\
+                                            </div>\
+                                        </div>\
+                                    </form>\
+                                </div>\
+                                <div class='d-flex flex-column align-items-center'>\
+                                    <p class='mt-3'><span id='buy-people-"+idx+"'>"+appliant+"</span> / <span id='max-people-"+idx+"'>"+max+"</span>명</p>\
+                                    <div class='d-flex flex-column-reverse pig mb-4'>\
+                                        <div id='pig-coin-"+idx+"' class='pig-coin w-100'></div>\
+                                        <img src='../statics/piggy-coin-empty.png' alt='This is a image of piggy-coin-empty' width='100%' height='100%' style='position: absolute; top: 0'/>\
+                                    </div>\
+                                    <button id='btn-buy-"+idx+"' type='button' class='btn btn-warning'> 살래요! </button>\
+                                </div>\
+                            </div>\
+                        </div>\
+                    </div>"
+        }
+        const container = document.querySelector("#container");
+        let posting = document.createElement("div");
+        posting.innerHTML = postingbox("0", "a", "b", "c", "d", "e", "f", "g", "1", "10")
+        let posting2 = document.createElement("div");
+        posting2.innerHTML = postingbox("1", "a", "b", "c", "d", "e", "f", "g", "1", "20")
+        container.appendChild(posting);
+        container.appendChild(posting2);
+
+        applyforbuy('');
+        for(let i=0; i<2; i++){
+            applyforbuy(i);
+        }
+
+        // Report button
+        const btn_reports = document.querySelectorAll(".btn-report");
+        btn_reports.forEach(btn_report => {
+            btn_report.addEventListener('click', () => {
+            alert("🚨 신고 접수 되었습니다! 🚨");
+            });
+        });
 
 
     </script>

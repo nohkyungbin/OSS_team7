@@ -7,6 +7,17 @@ h1 {
     font-family: 'Lobster', cursive;
 }
 
+footer {
+    width: 100%;
+    position: absolute;
+}
+
+#container {
+    padding-bottom: 150px;
+    position: relative;
+    min-height: 100%;
+}
+
 .bg-steel {
     background-color: lightsteelblue;
 }
@@ -31,12 +42,12 @@ h1 {
 
 
 .pig {
-    width: 400px; 
-    height: 400px; 
+    width: 300px;
+    aspect-ratio: 1 / 1;
     position: relative; 
 }
 
-#pig-coin {
+.pig-coin {
     background-color: gold; 
     position: absolute;
 }
