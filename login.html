@@ -5,15 +5,25 @@
 <link rel="stylesheet" href="style.css" type = 'text/css'>
     <title>로그인</title>
     <script type="text/javascript">
+
+        window.localStorage.setItem('login', false);
         function login(){
             var loginForm = document.loginForm;
-            var userId = loginForm.userId.value;
+            var id = loginForm.userId.value;
             var password = loginForm.password.value;
 
-            if(!userId || !password){
-                alert("아이디와 비밀번호를 모두 입력해주세요.")
+            if(!id || !password){
+                alert("아이디와 비밀번호를 모두 입력해주세요.");
+                window.localStorage.setItem('login', false);
                 return false;
-            }else{
+            }else if(id != window.localStorage.getItem('id') || password != window.localStorage.getItem('pwd')){
+              alert("아이디와 비밀번호를 확인해주세요");
+              window.localStorage.setItem('login', false);
+              return false;
+            }
+            else{
+                window.localStorage.setItem('login', true);
+                console.log(window.localStorage.getItem('login'))
                 return true;
             }
         }

@@ -71,8 +71,6 @@
               var name = nametext.value;
               var nick = nicktext.value;
 
-              window.localStorage.setItem('id', id);
-              console.log(window.localStorage.getItem('id'));
 
               var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
               //id와 비밀번호의 유효성 검사
@@ -125,7 +123,8 @@
                   mtext.focus();
                   return false;
               }
-
+          window.localStorage.setItem('id', id);
+          window.localStorage.setItem('pwd', password);
           return true;
          }
       </script>
