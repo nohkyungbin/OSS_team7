@@ -27,18 +27,7 @@
                     <div>Gong-Gu-Hae</div>
                 </div>
             </button>
-            <!-- My Profile -->
-            <button id="btn-profile" type="button" 
-                    class="btn btn-light d-flex flex-row align-items-center rounded me-2"
-                    data-bs-toggle="modal" data-bs-target="#exampleModal" style="color: steelblue">
-                <img src="../statics/person.png" alt="This is a image of person" width="100"/>
-                <div class="profile-info">
-                    <!-- My ID -->
-                    <div>abcdefg</div>
-                    <!-- My Points -->
-                    <div><span id="points">100</span> points</div>
-                </div>
-            </button>
+            <div id="btn-header"></div>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,7 +49,6 @@
                 </div>
                 </div>
             </div>
-
         </div>
         <!-- Category -->
         <nav>
@@ -71,9 +59,7 @@
                 <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">도서</button>
                 <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">생활용품</button>
                 <!-- Writing button -->
-                <div class="d-flex flex-row-reverse flex-grow-1">
-                    <button class="btn btn-secondary me-2 mb-2" type="button"><i class="bi bi-pencil-fill"></i></button>
-                </div>
+                <div id="btn-write" class="d-flex flex-row-reverse flex-grow-1"></div>
             </div>
         </nav>
     </header>
@@ -152,6 +138,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
     <script>
+        // Show Login button or Profile
+        function islogin(login){
+            const btn_header = document.querySelector('#btn-header');
+
+            if(!login){
+                let btn_login = "<button id='btn-login' type='button' \
+                                        class='btn btn-light d-flex flex-row align-items-center rounded me-2'\
+                                        style='color: steelblue'>\
+                                    <img src='../statics/person.png' alt='This is a image of person' width='100'/>\
+                                    <div class='profile-info'>\
+                                        <div>Login</div>\
+                                    </div>\
+                                </button>";
+                let btn_loginEl = document.createElement('div');
+                btn_loginEl.innerHTML = btn_login;
+                btn_header.appendChild(btn_loginEl);
+                
+            } else {
+                let btn_profile ="<button id='btn-profile' type='button'\
+                                        class='btn btn-light d-flex flex-row align-items-center rounded me-2'\
+                                        data-bs-toggle='modal' data-bs-target='#exampleModal' style='color: steelblue'>\
+                                    <img src='../statics/person.png' alt='This is a image of person' width='100'/>\
+                                    <div class='profile-info'>\
+                                        <div>abcdefg</div>\
+                                        <div><span id='points'>100</span> points</div>\
+                                    </div>\
+                                </button>";
+                let btn_profileEl = document.createElement('div');
+                btn_profileEl.innerHTML = btn_profile;
+                btn_header.appendChild(btn_profileEl);
+
+                const btn_write = document.querySelector('#btn-write')
+                let btn_writing = "<button class='btn btn-secondary me-2 mb-2' type='button'><i class='bi bi-pencil-fill'></i></button>"
+                let btn_writingEl = document.createElement('div');
+                btn_writingEl.innerHTML = btn_writing;
+                btn_write.appendChild(btn_writingEl);
+
+            }
+        }
+        islogin(false);
+
         // Put coin into piggy bank
         function applyforbuy(idx) {
             const btn_buy = document.querySelector("#btn-buy-"+idx);
