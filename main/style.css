@@ -1,65 +1,53 @@
-.head {
-    background-color: lightgray; 
-    display: flex; 
-    flex-direction: row; 
-    padding: 20px;
-}
-
-.webname {
-    width: 90%; 
-    text-align: center;
-}
-
-.profile {
-    border-radius: 30px; 
-    display: flex; 
-    flex-direction: row; 
-    align-items: center;
-}
-
-.profile-info {
+body {
     font-size: 20px;
 }
 
-.posting {
-    margin: 10px; 
-    border: 2px solid black;
+h1 {
+    font-size: 100px;
+    font-family: 'Lobster', cursive;
 }
 
-.posting-writer {
-    margin-right: 10px;
+footer {
+    width: 100%;
+    position: absolute;
 }
 
-.posting-content {
-    display: flex; 
-    flex-direction: row;
+#container {
+    padding-bottom: 150px;
+    position: relative;
+    min-height: 100%;
 }
 
-.content-info {
-    width: 100%; 
-    height: 500px; 
+.bg-steel {
+    background-color: lightsteelblue;
+}
+
+.webname {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+}
+
+.active {
+    color: black;
+}
+
+.content-info { 
     background-color: beige;
-    padding: 20px;
-}
-
-.site-info {
-    width: 80%;
-    height: 300px;
-    background-color: lavender;
 }
 
 
 .pig {
-    width: 800px; 
-    height: 500px; 
+    width: 300px;
+    aspect-ratio: 1 / 1;
     position: relative; 
-    display: flex; 
-    flex-direction: column-reverse;
 }
 
 .pig-coin {
-    width: 100%; 
-    height: 50%; 
     background-color: gold; 
     position: absolute;
 }
