@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css" type = 'text/css'>
+    <title>로그인</title>
+    <script type="text/javascript">
+
+        window.localStorage.setItem('login', false);
+        function login(){
+            var loginForm = document.loginForm;
+            var id = loginForm.userId.value;
+            var password = loginForm.password.value;
+
+            if(!id || !password){
+                alert("아이디와 비밀번호를 모두 입력해주세요.");
+                window.localStorage.setItem('login', false);
+                return false;
+            }else if(id != window.localStorage.getItem('id') || password != window.localStorage.getItem('pwd')){
+              alert("아이디와 비밀번호를 확인해주세요");
+              window.localStorage.setItem('login', false);
+              return false;
+            }
+            else{
+                window.localStorage.setItem('login', true);
+                console.log(window.localStorage.getItem('login'))
+                return true;
+            }
+        }
+    </script>
+</head>
+<body>
+  <h1 class="login">로그인</h1>
+  <header>
+  </header>
+    <form onsubmit="return login()" name="loginForm" action="index.html" method="post">
+      <div class="mainlogin">
+        <br>
+        아이디:  <input type="text" name="userId"><br><br>
+        비밀번호:  <input type="password" name="password"><br><br>
+        <br><br>
+        처음이신가요?
+        <a href="certi.html">회원가입</a>
+      </div>
+
+      <button type="submit" class="button" name="button">로그인</button>
+    </form>
+</body>
+</html>

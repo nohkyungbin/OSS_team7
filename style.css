@@ -1,0 +1,110 @@
+h1 {
+  font-size: 50px;
+  color: black;
+  text-align: center;
+}
+
+body {
+  background-color: white;
+  font-family: arial black;
+}
+
+header {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+.circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #cccccc;
+  font-size: 20px;
+  text-align: center;
+  line-height: 200px;
+}
+
+.login{
+  font-size: 50px;
+  color: black;
+  text-align: center;
+  margin-top: 200px;
+}
+
+#now {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #99FF99;
+  font-size: 20px;
+  text-align: center;
+  line-height: 200px;
+}
+
+#certi {
+  width: 1fr;
+  height: 1fr;
+  background-color: #99FF99;
+  margin-top: 50px;
+  text-align: center;
+}
+
+#done {
+  width: 1000px;
+  height: 1fr;
+  background-color: #99FF99;
+  font-size: 50px;
+  margin-top: 100px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main {
+  width: 1fr;
+  height: 1fr;
+  background-color: #99FF99;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.mainlogin{
+  width: 1fr;
+  height: 1fr;
+  background-color: #99FF99;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.button {
+  width: 200px;
+  height: 50px;
+  background-color: #ff6666;
+  margin-top: 100px;
+  margin-right: 40px;
+  color: black;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 50px;
+  float: right;
+}
+
+button {
+  width: 200px;
+  height: 50px;
+  background-color: #ff6666;
+  margin-top: 100px;
+  margin-right: 40px;
+  color: black;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 50px;
+  float: right;
+}

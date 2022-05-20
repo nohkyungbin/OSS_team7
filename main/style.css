@@ -1,0 +1,53 @@
+body {
+    font-size: 20px;
+}
+
+h1 {
+    font-size: 100px;
+    font-family: 'Lobster', cursive;
+}
+
+footer {
+    width: 100%;
+    position: absolute;
+}
+
+#container {
+    padding-bottom: 150px;
+    position: relative;
+    min-height: 100%;
+}
+
+.bg-steel {
+    background-color: lightsteelblue;
+}
+
+.webname {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+}
+
+.active {
+    color: black;
+}
+
+.content-info { 
+    background-color: beige;
+}
+
+
+.pig {
+    width: 300px;
+    aspect-ratio: 1 / 1;
+    position: relative; 
+}
+
+.pig-coin {
+    background-color: gold; 
+    position: absolute;
+}
