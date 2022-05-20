@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Web Page</title>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="head">
+            <!-- Web Page Name -->
+            <h1 class="webname">
+                <span><img src="../statics/piggy-coin.png" alt="This is a image of piggy-coin" width="100" height="100"/></span>
+                Gong-Gu-Hae
+            </h1>
+            <!-- My Profile -->
+            <button type="button" class="btn btn-success profile">
+                <img src="../statics/person.png" alt="This is a image of person" width="100"/>
+                <div class="profile-info">
+                    <div id="userId"></div>
+                    <div id="userPoint"></div>
+                </div>
+            </button>
+        </div>
+    </header>
+    <!-- Body -->
+    <div>
+        <div class="row">
+            <div class="col-8 offset-2">
+                <label for="title">제목</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="Title" id="title">
+                </div>    
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-8 offset-2">
+                <label for="des">글 작성</label>
+                <div class="input-group">
+                    <textarea  type="text" class="form-control" placeholder="description" id="des"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4 offset-2">
+                <label for="finish">마감기한</label>
+                <div class="input-group">
+                    <input id="finish" type="datetime-local" class="form-control" placeholder="Finish time">
+                </div>    
+            </div>
+            <div class="col-4">
+                <label for="cate">카테고리</label>
+                <select class="form-select input-group" id="cate">
+                    <option selected>category</option>
+                    <option id="cate" value="식품">식품</option>
+                    <option id="cate" value="의류">의류</option>
+                    <option id="cate" value="도서">도서</option>
+                    <option id="cate" value="생활용품">생활용품</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4 offset-2">
+                <label for="placeMeet">만나는 장소</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="Place to meet" id="placeMeet">
+                </div>    
+            </div>
+            <div class="col-4">
+                <label for="timeMeet">만나는 날짜 및 시간</label>
+                <div class="input-group">
+                    <input type="datetime-local" class="form-control" placeholder="Time to meet" id="timeMeet">
+                </div>
+            </div>    
+        </div>
+
+        <div class="row">
+            <div class="col-4 offset-2">
+                <label for="product">상품명</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="product" id="product">
+                </div>
+            </div>
+            <div class="col-4">
+                <label for="url">사이트</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="url of product info" id="url">
+                </div>
+            </div>    
+        </div>
+
+        <div class="row">
+            <div class="col-1 offset-9 d-flex flex-row-reverse">
+                <button type="button" class="btn btn-primary" id="save" data-bs-toggle="modal" data-bs-target="#saveModal" onclick="save()">저장</button>
+                <div id="saveModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <p>Sucessfully saved</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal" onclick="location.href='../main/index.html'">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <!-- Footer -->
+    <footer>
+        <div style="text-align: center; padding: 30px;">
+            OSS-TEAM7
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript; choose one of the two! -->    
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <script>
+        const store = window.localStorage;
+        window.addEventListener("load", () => {
+			const userId = store.getItem('id');
+            const userPoint = store.getItem('point');
+            document.getElementById('userId').innerHTML = userId;
+            document.getElementById('userPoint').innerText = userPoint + ' Points';
+		});
+        function save(){
+            let title = document.getElementById("title").value;
+            let des = document.getElementById("des").value;
+            let finish = document.getElementById("finish").value;
+            let cate = document.getElementById("cate").value;
+            let placeMeet = document.getElementById("placeMeet").value;
+            let timeMeet = document.getElementById("timeMeet").value;
+            let product = document.getElementById("product").value;
+            let url = document.getElementById("url").value;
+            
+            store.setItem("title",title);
+            store.setItem("description",des);
+            store.setItem("finishTime",finish);
+            store.setItem("category",cate);
+            store.setItem("placeMeet",placeMeet);
+            store.setItem("timeMeet",timeMeet);
+            store.setItem("product",product);
+            store.setItem("url",url);
+            store.setItem("id",'minchae');
+            store.setItem("point",100);
+
+            console.log(store.getItem('timeMeet'));
+            console.log(store.getItem('category'));
+        }
+    </script>
+</body>
+</html>
