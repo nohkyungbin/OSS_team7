@@ -26,9 +26,9 @@
                 <img src="../statics/person.png" alt="This is a image of person" width="100"/>
                 <div class="profile-info">
                     <!-- My ID -->
-                    <div>abcdefg</div>
+                    <div id="userId"></div>
                     <!-- My Points -->
-                    <div>9999 points</div>
+                    <div id="userPoint"></div>
                 </div>
             </button>
         </div>
@@ -103,8 +103,20 @@
         </div>
 
         <div class="row">
-            <div class="col-2 offset-9">
-                <button type="button" onclick="save()" class="btn btn-primary" id="save">저장</button>
+            <div class="col-1 offset-9 d-flex flex-row-reverse">
+                <button type="button" class="btn btn-primary" id="save" data-bs-toggle="modal" data-bs-target="#saveModal" onclick="save()">저장</button>
+                <div id="saveModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <p>Sucessfully saved</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal" onclick="location.href='../main/index.html'">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div> 
@@ -121,6 +133,12 @@
     
     <script>
         const store = window.localStorage;
+        window.addEventListener("load", () => {
+			const userId = store.getItem('id');
+            const userPoint = store.getItem('point');
+            document.getElementById('userId').innerHTML = userId;
+            document.getElementById('userPoint').innerText = userPoint + ' Points';
+		});
         function save(){
             let title = document.getElementById("title").value;
             let des = document.getElementById("des").value;
@@ -139,6 +157,8 @@
             store.setItem("timeMeet",timeMeet);
             store.setItem("product",product);
             store.setItem("url",url);
+            store.setItem("id",'minchae');
+            store.setItem("point",100);
 
             console.log(store.getItem('timeMeet'));
             console.log(store.getItem('category'));
