@@ -36,56 +36,80 @@
     <!-- Body -->
     <div>
         <div class="row">
-            <label for="title">제목</label>
-            <div class="input-group mb-3 col-sm-offset-2 col-sm-10">
-                <input class="form-control" placeholder="Title" id="title">
-            </div>
-        </div>
-
-        <div class="row">
-            <label for="des">글 작성</label>
-            <div class="input-group mb-3">
-                <textarea  type="text" class="form-control" placeholder="description" id="des"></textarea>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-4">
-                <label for="finish">마감기한</label>
-                <div class="input-group mb-3">
-                    <input id="finish" class="form-control" placeholder="Finish time">
+            <div class="col-8 offset-2">
+                <label for="title">제목</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="Title" id="title">
                 </div>    
             </div>
+        </div>
+
+        <div class="row">
+            <div class="col-8 offset-2">
+                <label for="des">글 작성</label>
+                <div class="input-group">
+                    <textarea  type="text" class="form-control" placeholder="description" id="des"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-4 offset-2">
-                <label for="cate">카테고리</label>
-                <div class="input-group mb-3">
-                    <input class="form-control" placeholder="Category" id="cate">
+                <label for="finish">마감기한</label>
+                <div class="input-group">
+                    <input id="finish" type="datetime-local" class="form-control" placeholder="Finish time">
                 </div>    
-            </div>    
+            </div>
+            <div class="col-4">
+                <label for="cate">카테고리</label>
+                <select class="form-select input-group" id="cate">
+                    <option selected>category</option>
+                    <option id="cate" value="식품">식품</option>
+                    <option id="cate" value="의류">의류</option>
+                    <option id="cate" value="도서">도서</option>
+                    <option id="cate" value="생활용품">생활용품</option>
+                </select>
+            </div>
         </div>
 
         <div class="row">
-            <div class="col-4">
+            <div class="col-4 offset-2">
                 <label for="placeMeet">만나는 장소</label>
-                <div class="input-group mb-3">
+                <div class="input-group">
                     <input class="form-control" placeholder="Place to meet" id="placeMeet">
                 </div>    
             </div>
-            <div class="col-4 offset-2">
-                <label for="timeMeet">만나는 시간</label>
-                <div class="input-group mb-3">
-                    <input class="form-control" placeholder="Time to meet" id="timeMeet">
+            <div class="col-4">
+                <label for="timeMeet">만나는 날짜 및 시간</label>
+                <div class="input-group">
+                    <input type="datetime-local" class="form-control" placeholder="Time to meet" id="timeMeet">
                 </div>
             </div>    
         </div>
+
         <div class="row">
-            <div class="col-1 offset-9">
+            <div class="col-4 offset-2">
+                <label for="product">상품명</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="product" id="product">
+                </div>
+            </div>
+            <div class="col-4">
+                <label for="url">사이트</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="url of product info" id="url">
+                </div>
+            </div>    
+        </div>
+
+        <div class="row">
+            <div class="col-2 offset-9">
                 <button type="button" onclick="save()" class="btn btn-primary" id="save">저장</button>
             </div>
         </div>
     </div> 
     <!-- Footer -->
-    <footer style="background-color: gray;">
+    <footer>
         <div style="text-align: center; padding: 30px;">
             OSS-TEAM7
         </div>
@@ -104,13 +128,20 @@
             let cate = document.getElementById("cate").value;
             let placeMeet = document.getElementById("placeMeet").value;
             let timeMeet = document.getElementById("timeMeet").value;
-
+            let product = document.getElementById("product").value;
+            let url = document.getElementById("url").value;
+            
             store.setItem("title",title);
             store.setItem("description",des);
             store.setItem("finishTime",finish);
             store.setItem("category",cate);
             store.setItem("placeMeet",placeMeet);
             store.setItem("timeMeet",timeMeet);
+            store.setItem("product",product);
+            store.setItem("url",url);
+
+            console.log(store.getItem('timeMeet'));
+            console.log(store.getItem('category'));
         }
     </script>
 </body>

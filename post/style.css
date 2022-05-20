@@ -16,10 +16,24 @@
     flex-direction: row; 
     align-items: center;
 }
-
 .profile-info {
     font-size: 20px;
 }
 .row {
-    padding-left: 10px;
+    padding-top: 30px;
+}
+label {
+    padding-bottom: 10px;
+}
+footer {
+    background-color: gray; 
+    position: absolute; 
+    bottom: 0; 
+    width: 100%;
+}
+#des {
+    height: 100px;
+}
+button {
+    padding-left: 12px;
 }
