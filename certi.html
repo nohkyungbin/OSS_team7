@@ -2,13 +2,12 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="OSS.css" type = 'text/css'>
+    <link rel="stylesheet" href="style.css" type = 'text/css'>
     <title>회원가입</title>
     <script language="javascript">
 
            function checkz()
           {
-              // event.preventDefault();
 
               var numtext = document.getElementById("phone");
               var nametext = document.getElementById("name");
@@ -47,17 +46,17 @@
     </script>
   </head>
   <body>
+    <h1 align = "center">회원가입</h1>
     <header>
-      <h1 align = "center">회원가입</h1>
-      <span class="circle" id="now">
+      <div class="circle" id="now">
         1. 본인인증
-      </span>
-      <span class="circle">
+      </div>
+      <div class="circle">
         2. 정보입력
-      </span>
-      <span class="circle">
+      </div>
+      <div class="circle">
         3. 가입완료
-      </span>
+      </div>
     </header>
     <form onsubmit="return checkz()" action="input.html" method="post" enctype="text/plain">
 
@@ -67,7 +66,7 @@
         <input type="text" name="name" id="name">
         <br><br>
         전화번호:
-        <input type="text" name="phone" id="phone">
+        <input type="text" name="phone" id="phone" placeholder="ex)01012345678"> ('-''없이 숫자만 입력)
         <br><br>
         통신사:
         <select id="com">

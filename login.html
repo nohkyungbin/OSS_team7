@@ -2,28 +2,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="OSS.css" type = 'text/css'>
+<link rel="stylesheet" href="style.css" type = 'text/css'>
     <title>로그인</title>
     <script type="text/javascript">
+
+        window.localStorage.setItem('login', false);
         function login(){
             var loginForm = document.loginForm;
-            var userId = loginForm.userId.value;
+            var id = loginForm.userId.value;
             var password = loginForm.password.value;
 
-            if(!userId || !password){
-                alert("아이디와 비밀번호를 모두 입력해주세요.")
+            if(!id || !password){
+                alert("아이디와 비밀번호를 모두 입력해주세요.");
+                window.localStorage.setItem('login', false);
                 return false;
-            }else{
+            }else if(id != window.localStorage.getItem('id') || password != window.localStorage.getItem('pwd')){
+              alert("아이디와 비밀번호를 확인해주세요");
+              window.localStorage.setItem('login', false);
+              return false;
+            }
+            else{
+                window.localStorage.setItem('login', true);
+                console.log(window.localStorage.getItem('login'))
                 return true;
             }
         }
     </script>
 </head>
 <body>
+  <h1 class="login">로그인</h1>
   <header>
-    <h1 class="login">로그인</h1>
   </header>
-    <form onsubmit="return login()" name="loginForm" action="home.html" method="post">
+    <form onsubmit="return login()" name="loginForm" action="index.html" method="post">
       <div class="mainlogin">
         <br>
         아이디:  <input type="text" name="userId"><br><br>

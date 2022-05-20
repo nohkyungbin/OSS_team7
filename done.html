@@ -2,12 +2,12 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="OSS.css" type = 'text/css'>
+    <link rel="stylesheet" href="style.css" type = 'text/css'>
     <title>회원가입</title>
   </head>
   <body>
+    <h1 align = "center">회원가입</h1>
     <header>
-      <h1 align = "center">회원가입</h1>
       <span class="circle">
         1. 본인인증
       </span>
@@ -28,5 +28,9 @@
     <a class="button" href="home.html">
       가입 완료
     </a>
+    <script type="text/javascript">
+      console.log(window.localStorage.getItem('id'));
+      console.log(window.localStorage.getItem('pwd'));
+    </script>
   </body>
 </html>

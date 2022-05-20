@@ -2,14 +2,59 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="OSS.css" type = 'text/css'>
+    <link rel="stylesheet" href="style.css?ver=1" type = 'text/css'>
     <title>회원가입</title>
+
+  </head>
+
+  <body>
+    <h1 align = "center">회원가입</h1>
+    <header>
+
+      <div class="circle">
+        1. 본인인증
+      </div>
+      <div class="circle" id="now">
+        2. 정보입력
+      </div>
+      <div class="circle">
+        3. 가입완료
+      </div>
+
+    </header>
+    <form onsubmit="return checkz()" action="done.html" method="post" enctype="text/plain" >
+      <div class="main">
+        <br>
+        이름:
+        <input type="text" name="name" id="name">
+        <br><br>
+        닉네임:
+        <input type="text" name="nickname" id="nick">
+        <br><br>
+        아이디:
+        <input type="text" name="id" maxlength="12" id="tbID" > 4~12자리의 영문 대소문자와 숫자로만 입력
+        <br><br>
+        비밀번호:
+        <input type="password" maxlength="12" id="tbPwd" > 4~12자리의 영문 대소문자와 숫자로만 입력
+        <br><br>
+        비밀번호 확인:
+        <input type="password" id="cpass" maxlength="12">
+        <br><br>
+        이메일:
+        <input type="text" name="addr" id="mail"> 예)id@domain.com
+        <br><br>
+      </div>
+
+        <button type="submit" class="button" name="button">다음 단계 →</button>
+
+
+    </form>
     <script language="javascript">
+
+
 
            function checkz()
           {
-              // event.preventDefault();
-
               var idtext = document.getElementById("tbID");
               var patext = document.getElementById("tbPwd");
               var cpatext = document.getElementById("cpass");
@@ -27,15 +72,12 @@
               var nick = nicktext.value;
 
 
-
-
               var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
               //id와 비밀번호의 유효성 검사
               var regExp2 = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/i;
               //e-mail의 유효성 검사
               var regname = /^[가-힝]{2,}$/;
               //이름의 유효성 검사
-              var regnick = /^[가-힝]{2,}$/;
 
               if (!regname.test(nametext.value))
               {
@@ -81,52 +123,10 @@
                   mtext.focus();
                   return false;
               }
+          window.localStorage.setItem('id', id);
+          window.localStorage.setItem('pwd', password);
           return true;
          }
-    </script>
-
-  </head>
-
-  <body>
-
-    <header>
-      <h1 align = "center">회원가입</h1>
-      <span class="circle">
-        1. 본인인증
-      </span>
-      <span class="circle" id="now">
-        2. 정보입력
-      </span>
-      <span class="circle">
-        3. 가입완료
-      </span>
-    </header>
-    <form onsubmit="return checkz()" action="done.html" method="post" enctype="text/plain" >
-      <div class="main">
-        <br>
-        이름:
-        <input type="text" name="name" id="name">
-        <br><br>
-        닉네임:
-        <input type="text" name="nickname" id="nick">
-        <br><br>
-        아이디:
-        <input type="text" name="id" maxlength="12" id="tbID" > 4~12자리의 영문 대소문자와 숫자로만 입력
-        <br><br>
-        비밀번호:
-        <input type="password" maxlength="12" id="tbPwd" > 4~12자리의 영문 대소문자와 숫자로만 입력
-        <br><br>
-        비밀번호 확인:
-        <input type="password" id="cpass" maxlength="12">
-        <br><br>
-        이메일:
-        <input type="text" name="addr" id="mail"> 예)id@domain.com
-        <br><br>
-      </div>
-
-        <button type="submit" class="button" name="button">다음 단계 →</button>
-
-
-    </form>
+      </script>
   </body>
 </html>
