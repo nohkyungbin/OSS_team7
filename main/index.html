@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
@@ -12,7 +12,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
     </style>
-    
+
     <title>GGH | Home</title>
 </head>
 <body>
@@ -40,7 +40,7 @@
                     <div class="modal-body">
                         <div class="input-group mb-3">
                             <input id="charge-coin" type="text" class="form-control" placeholder="ex. 10000">
-                        </div>                          
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -60,6 +60,7 @@
                 <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">생활용품</button>
                 <!-- Writing button -->
                 <div id="btn-write" class="d-flex flex-row-reverse flex-grow-1"></div>
+
             </div>
         </nav>
     </header>
@@ -73,7 +74,7 @@
                     <!-- Posting Title -->
                     <a class="navbar-brand fs-3">게시글</a>
                     <form class="d-flex align-items-center">
-                        <!-- Writer Name --> 
+                        <!-- Writer Name -->
                         <div class="me-4">abcdefg</div>
                         <!-- Report Button -->
                         <button type="button" class="btn btn-outline-danger btn-report"><i class="bi bi-bell"></i> Report</button>
@@ -133,10 +134,10 @@
         </div>
     </footer>
 
-    <!-- Optional JavaScript; choose one of the two! -->    
+    <!-- Optional JavaScript; choose one of the two! -->
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+
     <script>
         // Show Login button or Profile
         function islogin(login){
@@ -154,7 +155,12 @@
                 let btn_loginEl = document.createElement('div');
                 btn_loginEl.innerHTML = btn_login;
                 btn_header.appendChild(btn_loginEl);
-                
+
+                const btn = document.querySelector("#btn-login");
+                btn.addEventListener('click', () => {
+                  location.href="../login.html";
+                });
+
             } else {
                 let btn_profile ="<button id='btn-profile' type='button'\
                                         class='btn btn-light d-flex flex-row align-items-center rounded me-2'\
@@ -177,8 +183,12 @@
 
             }
         }
-        islogin(false);
+        islogin(window.localStorage.getItem('login'));
 
+        var write = document.querySelector("#btn-write");
+        write.addEventListener('click', () => {
+          location.href = "../post/index.html";
+        })
         // Put coin into piggy bank
         function applyforbuy(idx) {
             const btn_buy = document.querySelector("#btn-buy-"+idx);
