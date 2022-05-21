@@ -70,16 +70,6 @@
         <div class="border rounded m-4 p-2 shadow">
             <!-- Posting header  -->
             <nav class="navbar bg-light mb-2 rounded">
-                <div class="container-fluid" onclick="showpost()">
-                    <!-- Posting Title -->
-                    <a class="navbar-brand fs-3">게시글</a>
-                    <form class="d-flex align-items-center">
-                        <!-- Writer Name -->
-                        <div class="me-4">abcdefg</div>
-                        <!-- Report Button -->
-                        <button type="button" class="btn btn-outline-danger btn-report"><i class="bi bi-bell"></i> Report</button>
-                    </form>
-                </div>
             </nav>
             <!-- Posting body -->
             <div>
@@ -158,7 +148,7 @@
 
                 const btn = document.querySelector("#btn-login");
                 btn.addEventListener('click', () => {
-                  location.href="../login.html";
+                  location.href="../login/login.html";
                 });
 
             } else {
@@ -213,7 +203,7 @@
         }
 
         // Put coin into piggy bank
-        function applyforbuy(idx) {
+        function applyforbuy(idx, postings) {
             const btn_buy = document.querySelector("#btn-buy-"+idx);
             let pig_coin = document.querySelector("#pig-coin-"+idx);
             const max_people = Number(document.querySelector("#max-people-"+idx).innerText);
@@ -224,6 +214,7 @@
                     return;
                 }
                 people.innerText = Number(people.innerText) + 1;
+                postings[idx].appliant++;
                 pig_coin.style.height = String(Number(people.innerText) / max_people * 100) + "%";
                 console.log(pig_coin.className);
             });
@@ -241,10 +232,12 @@
             let appliant = 0;
             let max = 10;
 
-            return "<div class='border rounded m-4 p-2 shadow'>\
+            currentTitle = idx;
+
+            return "<div class='border rounded m-4 p-2 shadow' onclick='showpost()'>\
                         <nav class='navbar bg-light mb-2 rounded'>\
                             <div class='container-fluid'>\
-                                <a onclick='showpost()' class='navbar-brand fs-3'>"+title+"</a>\
+                                <a class='navbar-brand fs-3'>"+title+"</a>\
                                 <form class='d-flex align-items-center'>\
                                     <div class='me-4'>"+writer+"</div>\
                                     <button type='button' class='btn btn-outline-danger btn-report'><i class='bi bi-bell'></i> Report</button>\
@@ -299,13 +292,14 @@
         // List postings on body
         function listPost(postings)
         {
+            postlist = postings
             for(let i=0; i<postings.length; i++){
                 posting_info = postings[i];
                 let post = document.createElement('div');
                 post.innerHTML = postingbox(i, posting_info);
                 container.appendChild(post);
                 report_btn();
-                applyforbuy(i);
+                applyforbuy(i, postings);
             }
         }
         
@@ -325,7 +319,8 @@
         window.addEventListener('load', () => clickCategory());
 
         function showpost(){
-            window.localStorage.setItem('currentPost',title);
+            window.localStorage.setItem('currentPost',);
+            console.log(window.localStorage.getItem('currentPost'));
             location.href='../showPost/index.html';
         }
     </script>

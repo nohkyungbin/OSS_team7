@@ -9,7 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
-    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+    </style>
+
     <title>GGH | Posting</title>
 </head>
 <body>
@@ -129,7 +132,7 @@
         const title = store.getItem('currentPost');
         const userId = store.getItem('id');
         const userPoint = store.getItem('point');
-        let post;
+        const post = {};
         
         posting.forEach(p => {
             if(p.title === title){
@@ -138,29 +141,31 @@
             }
         })
 
+        console.log(post);
         const postId = post.id;
         const des = post.des;
-        const finish = post.finish;
+        const finish = post.finish.replace('T', ' ');
         const cate = post.cate;
         const place = post.place;
-        const timeMeet = post.timeMeet;
+        const time = post.time.replace('T', ' ');
         const product = post.item;
         const url = post.url;
         const max = post.max;
         const appliant = post.appliant;
         const comments = post.comment;
-
+        
         document.querySelector(".posting-writer").innerHTML = postId;
         document.querySelector(".comment-writer-name").innerHTML = userId;
         
-        const postContent = "<p>기한 : 2022년 12월 31일 11:59분 까지</p>\
+        const postContent = "<p>기한 : " + finish + "</p>\
                             <p>설명: " + des + " </p>\
                             <p>상품명 : " + product + "</p>\
                             <p>거래 장소 : " + place + "</p>\
-                            <p>거래 시간 : " + timeMeet + "</p>\
+                            <p>거래 시간 : " + time + "</p>\
                             <p>사이트 : <span><a href='" + url + "'>gmarket</a></span></p>"
         document.querySelector(".content-info").innerHTML = postContent;
         document.querySelector(".content-coin").innerHTML = "<p><span>" + appliant + "</span>/ " + max + "명</p>";
+        
         /* Comment */
         const btn_comment = document.querySelector("#btn-comment");
         let c = document.querySelector("#comments");
