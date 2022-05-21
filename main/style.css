@@ -51,3 +51,6 @@ footer {
     background-color: gold; 
     position: absolute;
 }
+.container-fluid {
+    cursor: pointer;
+}

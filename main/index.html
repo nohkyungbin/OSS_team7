@@ -70,7 +70,7 @@
         <div class="border rounded m-4 p-2 shadow">
             <!-- Posting header  -->
             <nav class="navbar bg-light mb-2 rounded">
-                <div class="container-fluid">
+                <div class="container-fluid" onclick="showpost()">
                     <!-- Posting Title -->
                     <a class="navbar-brand fs-3">게시글</a>
                     <form class="d-flex align-items-center">
@@ -203,10 +203,8 @@
                 people.innerText = Number(people.innerText) + 1;
                 pig_coin.style.height = String(Number(people.innerText) / max_people * 100) + "%";
                 console.log(pig_coin.className);
-
             });
         }
-
 
         // Charge points
         const btn_charge = document.querySelector('#btn-charge');
@@ -222,7 +220,7 @@
             return "<div class='border rounded m-4 p-2 shadow'>\
                         <nav class='navbar bg-light mb-2 rounded'>\
                             <div class='container-fluid'>\
-                                <a class='navbar-brand fs-3'>"+title+"</a>\
+                                <a onclick='showpost()' class='navbar-brand fs-3'>"+title+"</a>\
                                 <form class='d-flex align-items-center'>\
                                     <div class='me-4'>"+writer+"</div>\
                                     <button type='button' class='btn btn-outline-danger btn-report'><i class='bi bi-bell'></i> Report</button>\
@@ -290,7 +288,10 @@
             });
         });
 
-
+        function showpost(){
+            window.localStorage.setItem('currentPost',title);
+            location.href='../showPost/index.html';
+        }
     </script>
 </body>
 </html>
