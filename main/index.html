@@ -158,22 +158,35 @@
 
                 const btn = document.querySelector("#btn-login");
                 btn.addEventListener('click', () => {
-                  location.href="../login.html";
+                  location.href="../login/login.html";
                 });
 
             } else {
+                const id = window.localStorage.getItem('id');
+                const point = window.localStorage.getItem('point');
                 let btn_profile ="<button id='btn-profile' type='button'\
                                         class='btn btn-light d-flex flex-row align-items-center rounded me-2'\
                                         data-bs-toggle='modal' data-bs-target='#exampleModal' style='color: steelblue'>\
                                     <img src='../statics/person.png' alt='This is a image of person' width='100'/>\
                                     <div class='profile-info'>\
-                                        <div>abcdefg</div>\
-                                        <div><span id='points'>100</span> points</div>\
+                                        <div>"+id+"</div>\
+                                        <div><span id='point'>"+point+"</span> points</div>\
                                     </div>\
                                 </button>";
                 let btn_profileEl = document.createElement('div');
                 btn_profileEl.innerHTML = btn_profile;
                 btn_header.appendChild(btn_profileEl);
+
+                // When click profile button, Charge points
+                const btn_charge = document.querySelector('#btn-charge');
+                btn_charge.addEventListener('click', () => {
+                    let charge = document.querySelector('#charge-coin');
+                    let pointEl = document.querySelector('#point');
+                    let npoint =  Number(pointEl.innerText) + Number(charge.value);
+                    pointEl.innerText = npoint;
+                    window.localStorage.setItem('point', npoint);
+                    charge.value = '';
+                });
 
                 const btn_write = document.querySelector('#btn-write')
                 let btn_writing = "<button class='btn btn-secondary me-2 mb-2' type='button'><i class='bi bi-pencil-fill'></i></button>"
@@ -190,15 +203,6 @@
         var write = document.querySelector("#btn-write");
         write.addEventListener('click', () => {
           location.href = "../post/index.html";
-        });
-
-        // When click profile button, Charge points
-        const btn_charge = document.querySelector('#btn-charge');
-        btn_charge.addEventListener('click', () => {
-            let charge = document.querySelector('#charge-coin');
-            let points = document.querySelector('#points');
-            points.innerText = Number(points.innerText) + Number(charge.value);
-            charge.value = '';
         });
 
         // When click report button, Alert report
@@ -314,9 +318,9 @@
         function clickCategory(category)
         {
             let postings = JSON.parse(window.localStorage.getItem("postings"));
+            if(!postings) postings = [];
             while(container.hasChildNodes()) container.removeChild(container.firstChild);
             if(category) postings = postings.filter(post => post.cate === category)
-            console.log(postings);
             listPost(postings);
         }
 
