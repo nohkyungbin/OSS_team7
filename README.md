@@ -19,12 +19,12 @@
 
 ## 스크린샷
 
-![mainpage(before login)](./maincapture.png)
-![loginpage](./logincapture.png)
-![signup](./certicapture.png)
-![signup](./inputcapture.png)
-![signup](./donecapture.png)
-![mainpage(after login)](./maincapture_coin.png)
+![mainpage(before login)](./capture/maincapture.png)
+![loginpage](./capture/logincapture.png)
+![signup](./capture/certicapture.png)
+![signup](./capture/inputcapture.png)
+![signup](./capture/donecapture.png)
+![mainpage(after login)](./capture/maincapture_coin.png)
 
 ## 사용 예시
 
