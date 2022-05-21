@@ -129,11 +129,11 @@
     <script>
         const store = window.localStorage;
         const posting = JSON.parse(store.getItem('postings'));
-        const title = store.getItem('currentPost');
+        const title = "아아아ㅏ아아"; // store.getItem('currentPost');
         const userId = store.getItem('id');
         const userPoint = store.getItem('point');
-        const post = {};
-        
+        let post = {};
+
         posting.forEach(p => {
             if(p.title === title){
                 post = p;
@@ -176,11 +176,13 @@
                 return;
             }
             let commentEl = document.createElement("div");
-            commentEl.classList.add("comment");
-            commentEl.innerHTML = "<div class='comment-writer'> <div class='writer-name'><p>" + id + "</p></div><button class='btn btn-outline-danger btn-report' type='button' onclick='Reportmodal()'><i class='bi bi-bell'></i> Report</button></div>"
-            commentEl.innerHTML += "<p class='comment-content'>"+comment.value+"</p>"
-            c.appendChild(commentEl);
-            comment.value = '';
+            comments.forEach( c => {
+                commentEl.classList.add("comment");
+                commentEl.innerHTML = "<div class='comment-writer'> <div class='writer-name'><p>" + c.id + "</p></div><button class='btn btn-outline-danger btn-report' type='button' onclick='Reportmodal()'><i class='bi bi-bell'></i> Report</button></div>"
+                commentEl.innerHTML += "<p class='comment-content'>"+comment.value+"</p>"
+                c.appendChild(commentEl);
+                comment.value = '';
+            })
 
         })
 

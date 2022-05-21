@@ -220,15 +220,6 @@
             });
         }
 
-        // When click posting, Go to post page
-        function showPost(idx, title){
-            const post = document.querySelector('#post-'+idx);
-            post.addEventListener('click', () => {
-                window.localStorage.setItem('currentPost', title);
-                location.href='../showPost/index.html';
-            })
-        }
-
         // Posting box
         function postingbox(idx, posting) {
             let title = posting.title;
@@ -241,7 +232,9 @@
             let appliant = 0;
             let max = 10;
 
-            return "<div class='border rounded m-4 p-2 shadow' id='post-"+idx+"'>\
+            currentTitle = idx;
+
+            return "<div class='border rounded m-4 p-2 shadow' onclick='showpost()'>\
                         <nav class='navbar bg-light mb-2 rounded'>\
                             <div class='container-fluid'>\
                                 <a class='navbar-brand fs-3'>"+title+"</a>\
@@ -307,7 +300,6 @@
                 container.appendChild(post);
                 report_btn();
                 applyforbuy(i, postings);
-                showPost(i, posting_info.title);
             }
         }
         
@@ -317,13 +309,15 @@
             let postings = JSON.parse(window.localStorage.getItem("postings"));
             while(container.hasChildNodes()) container.removeChild(container.firstChild);
             if(category) postings = postings.filter(post => post.cate === category)
+            console.log(postings);
             listPost(postings);
         }
+
+        applyforbuy('');
 
         // Default status : clicked all tab
         window.addEventListener('load', () => clickCategory());
 
-        
     </script>
 </body>
 </html>
