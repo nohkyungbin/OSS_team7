@@ -53,11 +53,11 @@
         <!-- Category -->
         <nav>
             <div class="nav nav-tabs bg-steel" id="nav-tab" role="tablist">
-                <button class="nav-link active" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">전체</button>
-                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">식품</button>
-                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">의류</button>
-                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">도서</button>
-                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">생활용품</button>
+                <button id="tab-all" onclick="clickCategory()" class="nav-link active" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">전체</button>
+                <button id="tab-food" onclick="clickCategory('식품')" class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">식품</button>
+                <button id="tab-fashion" onclick="clickCategory('의류')" class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">의류</button>
+                <button id="tab-book" onclick="clickCategory('도서')" class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">도서</button>
+                <button id="tab-household" onclick="clickCategory('생활용품')" class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">생활용품</button>
                 <!-- Writing button -->
                 <div id="btn-write" class="d-flex flex-row-reverse flex-grow-1"></div>
 
@@ -183,12 +183,35 @@
 
             }
         }
+        
         islogin(window.localStorage.getItem('login'));
 
+        // When click write button, Move to post page
         var write = document.querySelector("#btn-write");
         write.addEventListener('click', () => {
           location.href = "../post/index.html";
-        })
+        });
+
+        // When click profile button, Charge points
+        const btn_charge = document.querySelector('#btn-charge');
+        btn_charge.addEventListener('click', () => {
+            let charge = document.querySelector('#charge-coin');
+            let points = document.querySelector('#points');
+            points.innerText = Number(points.innerText) + Number(charge.value);
+            charge.value = '';
+        });
+
+        // When click report button, Alert report
+        function report_btn()
+        {
+            const btn_reports = document.querySelectorAll(".btn-report");
+            btn_reports.forEach(btn_report => {
+                btn_report.addEventListener('click', () => {
+                alert("🚨 신고 접수 되었습니다! 🚨");
+                });
+            });
+        }
+
         // Put coin into piggy bank
         function applyforbuy(idx) {
             const btn_buy = document.querySelector("#btn-buy-"+idx);
@@ -207,18 +230,18 @@
             });
         }
 
-
-        // Charge points
-        const btn_charge = document.querySelector('#btn-charge');
-        btn_charge.addEventListener('click', () => {
-            let charge = document.querySelector('#charge-coin');
-            let points = document.querySelector('#points');
-            points.innerText = Number(points.innerText) + Number(charge.value);
-            charge.value = '';
-        })
-
         // Posting box
-        function postingbox(idx, title, writer, deadline, item, time, location, site, appliant, max) {
+        function postingbox(idx, posting) {
+            let title = posting.title;
+            let writer = posting.id;
+            let time = posting.time.replace('T', ' ');
+            let deadline = posting.finish.replace('T', ' ');
+            let item = posting.item;
+            let location = posting.place;
+            let site = posting.url;
+            let appliant = 0;
+            let max = 10;
+
             return "<div class='border rounded m-4 p-2 shadow'>\
                         <nav class='navbar bg-light mb-2 rounded'>\
                             <div class='container-fluid'>\
@@ -235,7 +258,7 @@
                                     <form>\
                                         <div class='row mb-3'>\
                                             <label for='inputEmail3' class='col-sm-2 col-form-label'>기한</label>\
-                                            <div class='col-sm-10 d-flex align-items-center'> ~ <span>"+deadline+"</span> 까지 </div>\
+                                            <div class='col-sm-10 d-flex align-items-center'> ~ <span>"+deadline+"</span></div>\
                                         </div>\
                                         <div class='row mb-3'>\
                                             <label for='inputEmail3' class='col-sm-2 col-form-label'>상품명</label>\
@@ -269,26 +292,38 @@
                         </div>\
                     </div>"
         }
-        const container = document.querySelector("#container");
-        let posting = document.createElement("div");
-        posting.innerHTML = postingbox("0", "a", "b", "c", "d", "e", "f", "g", "1", "10")
-        let posting2 = document.createElement("div");
-        posting2.innerHTML = postingbox("1", "a", "b", "c", "d", "e", "f", "g", "1", "20")
-        container.appendChild(posting);
-        container.appendChild(posting2);
+        
 
-        applyforbuy('');
-        for(let i=0; i<2; i++){
-            applyforbuy(i);
+
+        const container = document.getElementById('container');
+
+        // List postings on body
+        function listPost(postings)
+        {
+            for(let i=0; i<postings.length; i++){
+                posting_info = postings[i];
+                let post = document.createElement('div');
+                post.innerHTML = postingbox(i, posting_info);
+                container.appendChild(post);
+                report_btn();
+                applyforbuy(i);
+            }
+        }
+        
+        // When click category button
+        function clickCategory(category)
+        {
+            let postings = JSON.parse(window.localStorage.getItem("postings"));
+            while(container.hasChildNodes()) container.removeChild(container.firstChild);
+            if(category) postings = postings.filter(post => post.cate === category)
+            console.log(postings);
+            listPost(postings);
         }
 
-        // Report button
-        const btn_reports = document.querySelectorAll(".btn-report");
-        btn_reports.forEach(btn_report => {
-            btn_report.addEventListener('click', () => {
-            alert("🚨 신고 접수 되었습니다! 🚨");
-            });
-        });
+        applyforbuy('');
+
+        // Default status : clicked all tab
+        window.addEventListener('load', () => clickCategory());
 
 
     </script>
