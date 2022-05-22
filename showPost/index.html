@@ -13,14 +13,14 @@
         @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
     </style>
 
-    <title>GGH | Posting</title>
+    <title>GGH | Post</title>
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="d-flex flex-row p-2 bg-steel">
             <!-- Web Page Name -->
-            <button type="button" class="btn bg-steel p-0 me-2 d-flex flex-row flex-grow-1 rounded webname">
+            <button type="button" class="btn bg-steel p-0 me-2 d-flex flex-row flex-grow-1 rounded webname" onclick="gotomain()">
                 <img src="../statics/piggy-coin.png" alt="This is a image of piggy-coin" width="150" height="150"/>
                 <div>
                     <h1>GGH</h1>
@@ -50,65 +50,73 @@
                 </div>
             </div>
         </div>
-        <!-- Category -->
-        <nav>
-            <div class="nav nav-tabs bg-steel" id="nav-tab" role="tablist">
-                <button class="nav-link active" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">전체</button>
-                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">식품</button>
-                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">의류</button>
-                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">도서</button>
-                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">생활용품</button>
-                <!-- Writing button -->
-                <div id="btn-write" class="d-flex flex-row-reverse flex-grow-1"></div>
-            </div>
-        </nav>
     </header>
     <!-- Body -->
     <div>
         <!-- Posting Box-->
-        <div class="posting">
-            <nav class="navbar bg-light posting-title">
-                <div class="container-fluid">
-                    <!-- Posting Title -->
-                    <a class="navbar-brand">게시글</a>
-                    <form class="d-flex" style="align-items: center;">
-                        <!-- Writer Name --> 
-                        <div class="posting-writer"></div>
-                        <!-- Report Button -->
-                        <button type="button" class="btn btn-outline-danger btn-report" onclick="Reportmodal()"><i class="bi bi-bell"></i> Report</button>
+        <div class="m-4 p-2">
+            <nav class='navbar bg-light mb-2 rounded'>
+                <div id='post' class='container-fluid'>
+                    <a id="posting-title" class='navbar-brand fs-3'></a>
+                    <form class='d-flex align-items-center'>
+                        <div id="posting-writer" class='me-4'></div>
+                        <button type='button' class='btn btn-outline-danger btn-report'><i class='bi bi-bell'></i> Report</button>
                     </form>
                 </div>
-              </nav>
+            </nav>
             <div>
-                <div class="posting-content">
-                    <!-- Item -->
-                    <div class="content-info"></div>
-                    <div class="content-coin">
-                        <!-- Piggy Bank -->
-                        <div class="pig">
-                            <div class="pig-coin"></div>
-                            <img src="../statics/piggy-coin-empty.png" alt="This is a image of piggy-coin-empty" width="100%" height="100%" style="position: absolute; top: 0"/>
+                <div class='d-flex flex-row'>
+                    <div class='w-100 p-4 content-info'>
+                        <form>
+                            <div class='row mb-3'>
+                                <label for='inputEmail3' class='col-sm-2 col-form-label'>기한</label>
+                                <div class='col-sm-10 d-flex align-items-center'> ~ <span id="deadline"></span></div>
+                            </div>
+                            <div class='row mb-3'>
+                                <label for='inputEmail3' class='col-sm-2 col-form-label'>설명</label>
+                                <div id="des" class='col-sm-10 d-flex align-items-center flex-wrap'></div>
+                            </div>
+                            <div class='row mb-3'>
+                                <label for='inputEmail3' class='col-sm-2 col-form-label'>상품명</label>
+                                <div id="item" class='col-sm-10 d-flex align-items-center'></div>
+                            </div>
+                            <div class='row mb-3'>
+                                <label for='inputEmail3' class='col-sm-2 col-form-label'>인당 가격</label>
+                                <div class='col-sm-10 d-flex align-items-center'><span id="price"></span> points</div>
+                            </div>
+                            <div class='row mb-3'>
+                                <label for='inputEmail3' class='col-sm-2 col-form-label'>거래 시간</label>
+                                <div id="time" class='col-sm-10 d-flex align-items-center'></div>
+                            </div>
+                            <div class='row mb-3'>
+                                <label for='inputEmail3' class='col-sm-2 col-form-label'>거래 장소</label>
+                                <div id="location" class='col-sm-10 d-flex align-items-center'></div>
+                            </div>
+                            <div class='row mb-3'>
+                                <label for='inputEmail3' class='col-sm-2 col-form-label'>사이트</label>
+                                <div id="url" class='col-sm-10 d-flex align-items-center'>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class='d-flex flex-column align-items-center'>
+                        <p class='mt-3'><span id='buy-people'></span> / <span id='max-people'></span>명</p>
+                        <div class='d-flex flex-column-reverse pig mb-4'>
+                            <div id='pig-coin' class='pig-coin w-100'></div>
+                            <img src='../statics/piggy-coin-empty.png' alt='This is a image of piggy-coin-empty' width='100%' height='100%' style='position: absolute; top: 0'/>
                         </div>
-                        <button type="button" class="btn btn-warning"> 살래요! </button>
+                        <button id='btn-buy' type='button' class='btn btn-warning'> 살래요! </button>
                     </div>
                 </div>
             </div>
 
-            <div class="m-1">
+            <!-- Comment box -->
+            <div class="m-1 mt-3">
                 <div class="input-group mb-3">
                     <input id="comment-content" type="text" class="form-control" placeholder="Comment">
                     <button id="btn-comment" class="btn btn-outline-secondary" type="button">댓글 남기기</button>
                 </div>
-                <div id="comments">
-                    <div class="comment">
-                        <div class="comment-writer">
-                            <div class="writer-name"><p class="comment-writer-name"></p></div>
-                            <!-- Report Button -->
-                            <button class="btn btn-outline-danger btn-report" type="button" onclick="Reportmodal()"><i class="bi bi-bell"></i> Report</button>    
-                        </div>
-                        <p class="comment-content">hi hello 안녕 </p>
-                    </div>
-                </div>
+                <div id="comments"></div>
             </div>
         
         </div>
@@ -127,70 +135,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
     <script>
-        const store = window.localStorage;
-        const posting = JSON.parse(store.getItem('postings'));
-        const title = "아아아ㅏ아아"; // store.getItem('currentPost');
-        const userId = store.getItem('id');
-        const userPoint = store.getItem('point');
-        let post = {};
-
-        posting.forEach(p => {
-            if(p.title === title){
-                post = p;
-                return false;
-            }
-        })
-
-        console.log(post);
-        const postId = post.id;
-        const des = post.des;
-        const finish = post.finish.replace('T', ' ');
-        const cate = post.cate;
-        const place = post.place;
-        const time = post.time.replace('T', ' ');
-        const product = post.item;
-        const url = post.url;
-        const max = post.max;
-        const appliant = post.appliant;
-        const comments = post.comment;
-        
-        document.querySelector(".posting-writer").innerHTML = postId;
-        document.querySelector(".comment-writer-name").innerHTML = userId;
-        
-        const postContent = "<p>기한 : " + finish + "</p>\
-                            <p>설명: " + des + " </p>\
-                            <p>상품명 : " + product + "</p>\
-                            <p>거래 장소 : " + place + "</p>\
-                            <p>거래 시간 : " + time + "</p>\
-                            <p>사이트 : <span><a href='" + url + "'>gmarket</a></span></p>"
-        document.querySelector(".content-info").innerHTML = postContent;
-        document.querySelector(".content-coin").innerHTML = "<p><span>" + appliant + "</span>/ " + max + "명</p>";
-        
-        /* Comment */
-        const btn_comment = document.querySelector("#btn-comment");
-        let c = document.querySelector("#comments");
-        btn_comment.addEventListener('click', () => {
-            let comment = document.querySelector("#comment-content");
-            if(!comment.value) {
-                alert("1글자 이상 입력해주세요! 😅");
-                return;
-            }
-            let commentEl = document.createElement("div");
-            comments.forEach( c => {
-                commentEl.classList.add("comment");
-                commentEl.innerHTML = "<div class='comment-writer'> <div class='writer-name'><p>" + c.id + "</p></div><button class='btn btn-outline-danger btn-report' type='button' onclick='Reportmodal()'><i class='bi bi-bell'></i> Report</button></div>"
-                commentEl.innerHTML += "<p class='comment-content'>"+comment.value+"</p>"
-                c.appendChild(commentEl);
-                comment.value = '';
-            })
-
-        })
-
-         /* Report button */
-        function Reportmodal(){
-            alert("🚨 신고 접수 되었습니다! 🚨");
+        // When click logo, Move to main page
+        function gotomain()
+        {
+            location.href = "../main/index.html";
         }
 
+        // Show Login button or Profile
         function islogin(login){
             const btn_header = document.querySelector('#btn-header');
 
@@ -206,30 +157,149 @@
                 let btn_loginEl = document.createElement('div');
                 btn_loginEl.innerHTML = btn_login;
                 btn_header.appendChild(btn_loginEl);
-                
+
+                const btn = document.querySelector("#btn-login");
+                btn.addEventListener('click', () => {
+                  location.href="../login/login.html";
+                });
+
             } else {
+                const id = window.localStorage.getItem('id');
+                const point = window.localStorage.getItem('point');
                 let btn_profile ="<button id='btn-profile' type='button'\
                                         class='btn btn-light d-flex flex-row align-items-center rounded me-2'\
                                         data-bs-toggle='modal' data-bs-target='#exampleModal' style='color: steelblue'>\
                                     <img src='../statics/person.png' alt='This is a image of person' width='100'/>\
                                     <div class='profile-info'>\
                                         <div>"+id+"</div>\
-                                        <div><span id='points'>100</span> points</div>\
+                                        <div><span id='point'>"+point+"</span> points</div>\
                                     </div>\
                                 </button>";
                 let btn_profileEl = document.createElement('div');
                 btn_profileEl.innerHTML = btn_profile;
                 btn_header.appendChild(btn_profileEl);
 
-                const btn_write = document.querySelector('#btn-write')
-                let btn_writing = "<button class='btn btn-secondary me-2 mb-2' type='button'><i class='bi bi-pencil-fill'></i></button>"
-                let btn_writingEl = document.createElement('div');
-                btn_writingEl.innerHTML = btn_writing;
-                btn_write.appendChild(btn_writingEl);
+                // When click profile button, Charge points
+                const btn_charge = document.querySelector('#btn-charge');
+                btn_charge.addEventListener('click', () => {
+                    let charge = document.querySelector('#charge-coin');
+                    let pointEl = document.querySelector('#point');
+                    let npoint =  Number(pointEl.innerText) + Number(charge.value);
+                    pointEl.innerText = npoint;
+                    window.localStorage.setItem('point', npoint);
+                    charge.value = '';
+                });
 
             }
         }
-        islogin(true);
+        
+        islogin(JSON.parse(window.localStorage.getItem('login')));
+
+        // When click report button, Alert report
+        function report_btn()
+        {
+            const btn_reports = document.querySelectorAll(".btn-report");
+            btn_reports.forEach(btn_report => {
+                btn_report.addEventListener('click', () => {
+                alert("🚨 신고 접수 되었습니다! 🚨");
+                });
+            });
+        }
+
+        // Put coin into piggy bank
+        function applyforbuy(idx) {
+            let postings = JSON.parse(window.localStorage.getItem('postings'));
+            const btn_buy = document.querySelector('#btn-buy');
+            const max_people = postings[idx].max;
+            btn_buy.addEventListener('click', () => {
+                let npeople = postings[idx].appliant;
+                if(npeople == max_people){
+                    alert("인원모집이 완료되어 신청할 수 없습니다 ☹️");
+                    return;
+                }
+                
+                let point = window.localStorage.getItem('point');
+                if(point < postings[idx].price){
+                    alert("포인트가 부족합니다 😱 포인트를 충전해주세요!");
+                    return;
+                }
+                point -= postings[idx].price;
+
+                let peoplEl = document.querySelector('#buy-people');
+                point -= postings[idx].price;
+                npeople += 1;
+                peoplEl.innerText = npeople;
+                postings[idx].appliant = npeople;
+                window.localStorage.setItem('postings', JSON.stringify(postings));
+                window.localStorage.setItem('point', point);
+                location.reload();
+            });
+        }
+
+        // Draw piggy bank
+        function drawpigcoin(idx){
+            let postings = JSON.parse(window.localStorage.getItem('postings'));
+            let post = postings[idx];
+            let pig_coin = document.querySelector("#pig-coin");
+            pig_coin.style.height = String(post.appliant / post.max * 100) + "%";
+        }
+
+        // Insert posting information
+        const postings = JSON.parse(window.localStorage.getItem('postings'));
+        const title = window.localStorage.getItem('currentPost');
+        const post = postings.find(p => p.title === title);
+        const i = postings.findIndex(p => p.title === title);
+        
+        document.querySelector('#posting-title').innerText = post.title;
+        document.querySelector("#posting-writer").innerText = post.id;
+        document.querySelector('#deadline').innerText = post.finish.replace('T', ' ');
+        document.querySelector('#des').innerText = post.des;
+        document.querySelector('#item').innerText = post.item;
+        document.querySelector('#price').innerText = post.price;
+        document.querySelector('#time').innerText = post.time.replace('T', ' ');
+        document.querySelector('#location').innerText = post.place;
+        document.querySelector('#url').innerHTML = "<a href='"+post.url+"'>"+post.url+"</a>";
+        document.querySelector('#buy-people').innerText = post.appliant;
+        document.querySelector('#max-people').innerText = post.max;
+        drawpigcoin(i);
+        applyforbuy(i);
+        drawComment(i);
+        comment_btn(i);
+
+        // Comment
+        function comment_btn(idx)
+        {
+            const btn_comment = document.querySelector("#btn-comment");
+            let postings = JSON.parse(window.localStorage.getItem('postings'));
+            btn_comment.addEventListener('click', () => {
+                let comment = document.querySelector("#comment-content");
+                if(!comment.value) {
+                    alert("1글자 이상 입력해주세요! 😅");
+                    return;
+                }
+                postings[idx].comments.push({
+                    id: window.localStorage.getItem('id'),
+                    comment: comment.value
+                });
+                window.localStorage.setItem('postings', JSON.stringify(postings));
+                drawComment(idx);
+            })
+        }
+
+        // List comments
+        function drawComment(idx)
+        {
+            let postings = JSON.parse(window.localStorage.getItem('postings'));
+            let comments = document.querySelector("#comments");
+            postings[idx].comments.forEach(c => {
+                let commentEl = document.createElement("div");
+                commentEl.classList.add("comment");
+                commentEl.innerHTML = "<div class='comment-writer'> <div class='writer-name'><p>" + c.id + "</p></div><button class='btn btn-outline-danger btn-report' type='button' onclick='Reportmodal()'><i class='bi bi-bell'></i> Report</button></div>"
+                commentEl.innerHTML += "<p class='comment-content'>"+c.comment+"</p>"
+                comments.appendChild(commentEl);
+            });
+            report_btn();
+        }
 
     </script>
 </body>

@@ -1,88 +1,91 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+<head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css" type = 'text/css'>
-    <title>회원가입</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <title>GHH | Signup-1</title>
+</head>
+<body>
+    <h1 align = "center">회원가입</h1>
+    <header>
+        <div class="circle" id="now">
+            1. 본인인증
+        </div>
+        <div class="circle">
+            2. 정보입력
+        </div>
+        <div class="circle">
+            3. 가입완료
+        </div>
+    </header>
+    <form onsubmit="return checkz()" action="./input.html" method="post" enctype="text/plain">
+        <div class="main" id="certi">
+            <br>
+            이름: <input type="text" name="name" id="name">
+            <br><br>
+            전화번호: <input type="text" name="phone" id="phone" placeholder="ex)01012345678"> ('-''없이 숫자만 입력)
+            <br><br>
+            통신사:
+            <select id="com">
+                <option selected>선택</option>
+                <option>SKT</option>
+                <option>KT</option>
+                <option>LG U+</option>
+                <option>SKT 알뜰폰</option>
+                <option>KT 알뜰폰</option>
+                <option>LG U+ 알뜰폰</option>
+            </select>
+            <br><br>
+        </div>
+        <button type="submit" class="button" name="button">다음 단계 → </button>
+    </form>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
     <script language="javascript">
+        // Check name, phone number and agency
+        function checkz()
+        {
+            var numtext = document.getElementById("phone");
+            var nametext = document.getElementById("name");
+            var comtext = document.getElementById("com");
+            
+            var phone = numtext.value;
+            var name = nametext.value;
+            var com = comtext.value;
 
-           function checkz()
-          {
+            var regExp1 = /^[0-9]{11}$/;
+            var regname = /^[가-힝]{2,}$/;
 
-              var numtext = document.getElementById("phone");
-              var nametext = document.getElementById("name");
-              var comtext = document.getElementById("com");
-
-
-
-              var phone = numtext.value;
-              var name = nametext.value;
-              var com = comtext.value;
-
-
-
-              var regExp1 = /^[0-9]{11}$/;
-              var regname = /^[가-힝]{2,}$/;
-
-              if (!regname.test(nametext.value))
-              {
-                  alert("이름을 올바르게 입력해주세요.");
-                  nametext.value = "";
-                  nametext.focus();
-                  return false;
-              }if(!regExp1.test(numtext.value))
-              {
+            if (!regname.test(nametext.value)){
+                alert("이름을 올바르게 입력해주세요.");
+                nametext.value = "";
+                nametext.focus();
+                return false;
+            }
+            
+            if(!regExp1.test(numtext.value)){
                 alert("전화번호를 올바르게 입력해주세요.");
                 numtext.value = "";
                 numtext.focus();
                 return false;
-              }if(comtext.value == "선택")
-              {
+            }
+            
+            if(comtext.value == "선택"){
                 alert("통신사를 선택해주세요.");
                 return false;
-              }
-          return true;
-         }
+            }
+
+            return true;
+        }
     </script>
-  </head>
-  <body>
-    <h1 align = "center">회원가입</h1>
-    <header>
-      <div class="circle" id="now">
-        1. 본인인증
-      </div>
-      <div class="circle">
-        2. 정보입력
-      </div>
-      <div class="circle">
-        3. 가입완료
-      </div>
-    </header>
-    <form onsubmit="return checkz()" action="./input.html" method="post" enctype="text/plain">
-
-      <div class="main" id="certi">
-        <br>
-        이름:
-        <input type="text" name="name" id="name">
-        <br><br>
-        전화번호:
-        <input type="text" name="phone" id="phone" placeholder="ex)01012345678"> ('-''없이 숫자만 입력)
-        <br><br>
-        통신사:
-        <select id="com">
-          <option selected>선택</option>
-          <option>SKT</option>
-          <option>KT</option>
-          <option>LG U+</option>
-          <option>SKT 알뜰폰</option>
-          <option>KT 알뜰폰</option>
-          <option>LG U+ 알뜰폰</option>
-        </select>
-        <br><br>
-      </div>
-
-      <button type="submit" class="button" name="button">다음 단계 →</button>
-
-  </form>
-  </body>
+</body>
 </html>

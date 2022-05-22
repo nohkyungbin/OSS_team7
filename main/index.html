@@ -20,7 +20,7 @@
     <header>
         <div class="d-flex flex-row p-2 bg-steel">
             <!-- Web Page Name -->
-            <button type="button" class="btn bg-steel p-0 me-2 d-flex flex-row flex-grow-1 rounded webname">
+            <button type="button" class="btn bg-steel p-0 me-2 d-flex flex-row flex-grow-1 rounded webname" onclick="gotomain()">
                 <img src="../statics/piggy-coin.png" alt="This is a image of piggy-coin" width="150" height="150"/>
                 <div>
                     <h1>GGH</h1>
@@ -80,6 +80,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <script>
+        // When click logo, Move to main page
+        function gotomain()
+        {
+            location.href = "../main/index.html";
+        }
+
         // Show Login button or Profile
         function islogin(login){
             const btn_header = document.querySelector('#btn-header');
@@ -157,31 +163,53 @@
         }
 
         // Put coin into piggy bank
-        function applyforbuy(idx, postings) {
-            const btn_buy = document.querySelector("#btn-buy-"+idx);
+        function applyforbuy(idx) {
+            const btn_buy = document.querySelector('#btn-buy-'+idx);
+            if(!btn_buy) return;
+            let postings = JSON.parse(window.localStorage.getItem('postings'));
             const max_people = postings[idx].max;
-            btn_buy.addEventListener('click', () => {
-                let peoplEl = document.querySelector('#buy-people-'+idx);
+            btn_buy.addEventListener('click', () => {    
                 let npeople = postings[idx].appliant;
                 if(npeople == max_people){
                     alert("인원모집이 완료되어 신청할 수 없습니다 ☹️");
                     return;
                 }
+
+                let point = window.localStorage.getItem('point');
+                if(point < postings[idx].price){
+                    alert("포인트가 부족합니다 😱 포인트를 충전해주세요!");
+                    return;
+                }
+                
+                let peoplEl = document.querySelector('#buy-people-'+idx);
+                point -= postings[idx].price;
                 npeople += 1;
                 peoplEl.innerText = npeople;
                 postings[idx].appliant = npeople;
                 window.localStorage.setItem('postings', JSON.stringify(postings));
-                drawpigcoin(idx);
+                window.localStorage.setItem('point', point);
+                location.reload();
             });
         }
 
         // Draw piggy bank
         function drawpigcoin(idx){
+            let pig_coin = document.querySelector("#pig-coin-"+idx);
+            if(!pig_coin) return;
             let postings = JSON.parse(window.localStorage.getItem('postings'));
             let post = postings[idx];
-            let pig_coin = document.querySelector("#pig-coin-"+idx);
             pig_coin.style.height = String(post.appliant / post.max * 100) + "%";
-            console.log(pig_coin.style.height);
+        }
+
+        // When click posting, Go to post page
+        function showPost(idx){
+            const post = document.querySelector('#post-'+idx);
+            if(!post) return;
+            let postings = JSON.parse(window.localStorage.getItem('postings'));
+            post.addEventListener('click', () => {
+                window.localStorage.setItem('currentPost', postings[idx].title);
+                location.href='../showPost/index.html';
+            })
         }
 
         // Posting box
@@ -191,6 +219,7 @@
             let time = posting.time.replace('T', ' ');
             let deadline = posting.finish.replace('T', ' ');
             let item = posting.item;
+            let price = posting.price;
             let location = posting.place;
             let site = posting.url;
             let appliant = posting.appliant;
@@ -198,10 +227,10 @@
 
             currentTitle = idx;
 
-            return "<div class='border rounded m-4 p-2 shadow' onclick='showpost()'>\
+            return "<div class='border rounded m-4 p-2 shadow'>\
                         <nav class='navbar bg-light mb-2 rounded'>\
                             <div class='container-fluid'>\
-                                <a class='navbar-brand fs-3'>"+title+"</a>\
+                                <a id='post-"+idx+"' class='navbar-brand fs-3'>"+title+"</a>\
                                 <form class='d-flex align-items-center'>\
                                     <div class='me-4'>"+writer+"</div>\
                                     <button type='button' class='btn btn-outline-danger btn-report'><i class='bi bi-bell'></i> Report</button>\
@@ -219,6 +248,10 @@
                                         <div class='row mb-3'>\
                                             <label for='inputEmail3' class='col-sm-2 col-form-label'>상품명</label>\
                                             <div class='col-sm-10 d-flex align-items-center'>"+item+"</div>\
+                                        </div>\
+                                        <div class='row mb-3'>\
+                                            <label for='inputEmail3' class='col-sm-2 col-form-label'>인당 가격</label>\
+                                            <div class='col-sm-10 d-flex align-items-center'>"+price+" points</div>\
                                         </div>\
                                         <div class='row mb-3'>\
                                             <label for='inputEmail3' class='col-sm-2 col-form-label'>거래 시간</label>\
@@ -254,18 +287,26 @@
         const container = document.getElementById('container');
 
         // List postings on body
-        function listPost(postings)
+        function listPost(postings, category)
         {
-            postlist = postings
-            for(let i=0; i<postings.length; i++){
+            let relatedpostings = postings
+            if(category) relatedpostings = postings.filter(post => post.cate === category)
+            
+            // Show postings related with category
+            for(let i=0; i<relatedpostings.length; i++){
                 posting_info = postings[i];
                 let post = document.createElement('div');
                 post.innerHTML = postingbox(i, posting_info);
                 container.appendChild(post);
-                report_btn();
+            }
+
+            // Add event for each buttons
+            for(let i=0; i<postings.length; i++){
                 applyforbuy(i);
                 drawpigcoin(i);
+                showPost(i);
             }
+            report_btn();
         }
         
         // When click category button
@@ -273,9 +314,9 @@
         {
             let postings = JSON.parse(window.localStorage.getItem("postings"));
             if(!postings) return;
+
             while(container.hasChildNodes()) container.removeChild(container.firstChild);
-            if(category) postings = postings.filter(post => post.cate === category)
-            listPost(postings);
+            listPost(postings, category);
         }
 
         // Default status : clicked all tab
