@@ -93,11 +93,20 @@
                 </div>
             </div>
             <div class="col-4">
-                <label for="url">사이트</label>
+                <label for="max">모집 인원</label>
                 <div class="input-group">
-                    <input class="form-control" placeholder="url of product info" id="url">
+                    <input class="form-control" placeholder="max people" id="max">
                 </div>
             </div>    
+        </div>
+        
+        <div class="row">
+            <div class="col-8 offset-2">
+                <label for="url">상품 사이트</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="url of product info" id="url">
+                </div>  
+            </div>
         </div>
 
         <div class="row">
@@ -131,12 +140,17 @@
     
     <script>
         const store = window.localStorage;
+        const userId = store.getItem('id');
         window.addEventListener("load", () => {
-			const userId = store.getItem('id');
             const userPoint = store.getItem('point');
             document.getElementById('userId').innerHTML = userId;
             document.getElementById('userPoint').innerText = userPoint + ' Points';
 		});
+
+        let postings = store.getItem('postings');
+        if(!postings) postings = [];
+        else postings = JSON.parse(postings)
+
         function save(){
             let title = document.getElementById("title").value;
             let des = document.getElementById("des").value;
@@ -146,20 +160,24 @@
             let timeMeet = document.getElementById("timeMeet").value;
             let product = document.getElementById("product").value;
             let url = document.getElementById("url").value;
-            
-            store.setItem("title",title);
-            store.setItem("description",des);
-            store.setItem("finishTime",finish);
-            store.setItem("category",cate);
-            store.setItem("placeMeet",placeMeet);
-            store.setItem("timeMeet",timeMeet);
-            store.setItem("product",product);
-            store.setItem("url",url);
-            store.setItem("id",'minchae');
-            store.setItem("point",100);
+            let max = document.getElementById("max").value;
 
-            console.log(store.getItem('timeMeet'));
-            console.log(store.getItem('category'));
+            postings.push({
+                id: userId,
+                title: title,
+                des: des,
+                finish: finish,
+                cate: cate,
+                place: placeMeet,
+                time: timeMeet,
+                item: product,
+                url: url,
+                appliant: 0,
+                max: max
+            });
+            
+            store.setItem('postings', JSON.stringify(postings));
+
         }
     </script>
 </body>
