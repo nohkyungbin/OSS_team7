@@ -22,13 +22,6 @@ footer {
     background-color: lightsteelblue;
 }
 
-.head {
-    background-color: lightgray; 
-    display: flex; 
-    flex-direction: row; 
-    padding: 20px;
-}
-
 .webname {
     text-align: center;
     justify-content: center;

@@ -2,11 +2,11 @@ h1 {
   font-size: 50px;
   color: black;
   text-align: center;
+  font-family: arial black;
 }
 
 body {
   background-color: white;
-  font-family: arial black;
 }
 
 header {
@@ -17,6 +17,7 @@ header {
     margin-left: 150px;
     margin-right: 150px;
 }
+
 .circle {
   width: 200px;
   height: 200px;
@@ -26,6 +27,7 @@ header {
   text-align: center;
   line-height: 200px;
   margin: 0 auto;
+  font-family: arial black;
 }
 
 .login{
@@ -67,11 +69,12 @@ header {
 }
 
 .main {
-  width: 1fr;
+  width: 100% !important;
   height: 1fr;
   background-color: lightsteelblue;
   margin-top: 50px;
   text-align: center;
+  font-family: arial black;
 }
 
 .mainlogin{
@@ -81,6 +84,7 @@ header {
   background-color: lightsteelblue;
   margin-top: 50px;
   text-align: center;
+  border-radius: 0.5rem;
 }
 
 .button {
@@ -96,6 +100,7 @@ header {
   text-align: center;
   line-height: 50px;
   float: right;
+  font-family: arial black;
 }
 
 button {
@@ -111,4 +116,6 @@ button {
   text-align: center;
   line-height: 50px;
   float: right;
+  border: none;
+  font-family: arial black;
 }

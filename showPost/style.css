@@ -1,94 +1,3 @@
-.head {
-    background-color: lightgray; 
-    padding: 10px;
-}
-
-.webname {
-    width: 85%; 
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
-
-.profile {
-    border-radius: 30px;
-    align-items: center;
-}
-
-.profile-info {
-    font-size: 20px;
-}
-
-.posting {
-    border: 2px solid black;
-    border-radius: 10px;
-    margin: 10px; 
-    padding: 10px;
-}
-
-.posting-title {
-    margin-bottom: 10px;
-    border-radius: 10px;
-}
-
-.posting-writer {
-    margin-right: 10px;
-}
-
-.posting-content {
-    display: flex; 
-    flex-direction: row;
-}
-
-.content-info {
-    width: 100%; 
-    height: 500px; 
-    background-color: beige;
-    padding: 20px;
-}
-
-.content-coin {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.comment {
-    display: flex;
-    flex-direction: row;
-    border: solid lightgray;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.comment-writer {
-    padding: 0 1rem;
-    display: flex;
-    flex-direction: column;
-    border-right: solid lightgray;
-}
-
-.writer-name {
-    background-color: lightsteelblue;
-    border-radius: 50rem;
-    padding-top: 1rem;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#btn-report {
-    background-color: transparent;
-    color: red;
-    border: unset;
-    border-bottom: solid red;
-}
-
-.comment-content {
-    padding-left: 1rem;
-}
 body {
     font-size: 20px;
 }
@@ -129,9 +38,7 @@ footer {
 
 .content-info { 
     background-color: beige;
-    max-width: 800px;
 }
-
 
 .pig {
     width: 300px;
@@ -142,4 +49,45 @@ footer {
 .pig-coin {
     background-color: gold; 
     position: absolute;
+}
+
+.container-fluid {
+    cursor: pointer;
+}
+
+.comment {
+    display: flex;
+    flex-direction: row;
+    border: solid lightgray;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.comment-writer {
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    border-right: solid lightgray;
+}
+
+.writer-name {
+    background-color: lightsteelblue;
+    border-radius: 50rem;
+    padding-top: 1rem;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#btn-report {
+    background-color: transparent;
+    color: red;
+    border: unset;
+    border-bottom: solid red;
+}
+
+.comment-content {
+    padding-left: 1rem;
 }
