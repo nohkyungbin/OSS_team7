@@ -129,6 +129,7 @@ footer {
 
 .content-info { 
     background-color: beige;
+    max-width: 800px;
 }
 
 

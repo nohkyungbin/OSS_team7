@@ -89,7 +89,7 @@
                             <div class="pig-coin"></div>
                             <img src="../statics/piggy-coin-empty.png" alt="This is a image of piggy-coin-empty" width="100%" height="100%" style="position: absolute; top: 0"/>
                         </div>
-                        <button type="button" class="btn btn-warning"> 살래요! </button>
+                        <button id="buy" type="button" class="btn btn-warning"> 살래요! </button>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
     <script>
         const store = window.localStorage;
         const posting = JSON.parse(store.getItem('postings'));
-        const title = "아아아ㅏ아아"; // store.getItem('currentPost');
+        const title = store.getItem('currentPost');
         const userId = store.getItem('id');
         const userPoint = store.getItem('point');
         let post = {};
@@ -152,7 +152,11 @@
         const url = post.url;
         const max = post.max;
         const appliant = post.appliant;
-        const comments = post.comment;
+        let comments = post.comment;
+        
+        /* if(comments === undefined){
+            comments = [];
+        } */
         
         document.querySelector(".posting-writer").innerHTML = postId;
         document.querySelector(".comment-writer-name").innerHTML = userId;
@@ -166,6 +170,18 @@
         document.querySelector(".content-info").innerHTML = postContent;
         document.querySelector(".content-coin").innerHTML = "<p><span>" + appliant + "</span>/ " + max + "명</p>";
         
+        console.log(comments);
+        if(comments){
+            comments.forEach( c => {
+                console.log(c);
+                let commentEl = document.createElement("div");
+                commentEl.classList.add("comment");
+                commentEl.innerHTML = "<div class='comment-writer'> <div class='writer-name'><p>" + c.id + "</p></div><button class='btn btn-outline-danger btn-report' type='button' onclick='Reportmodal()'><i class='bi bi-bell'></i> Report</button></div>"
+                commentEl.innerHTML += "<p class='comment-content'>"+c.content+"</p>"
+                document.querySelector("#comments").appendChild(commentEl);
+            })
+        }
+        document.querySelector(".pig-coin").innerHTML = appliant + ' / ' + max + '명';
         /* Comment */
         const btn_comment = document.querySelector("#btn-comment");
         let c = document.querySelector("#comments");
@@ -176,14 +192,30 @@
                 return;
             }
             let commentEl = document.createElement("div");
-            comments.forEach( c => {
-                commentEl.classList.add("comment");
-                commentEl.innerHTML = "<div class='comment-writer'> <div class='writer-name'><p>" + c.id + "</p></div><button class='btn btn-outline-danger btn-report' type='button' onclick='Reportmodal()'><i class='bi bi-bell'></i> Report</button></div>"
-                commentEl.innerHTML += "<p class='comment-content'>"+comment.value+"</p>"
-                c.appendChild(commentEl);
-                comment.value = '';
+            commentEl.classList.add("comment");
+            commentEl.innerHTML = "<div class='comment-writer'> <div class='writer-name'><p>" + userId + "</p></div><button class='btn btn-outline-danger btn-report' type='button' onclick='Reportmodal()'><i class='bi bi-bell'></i> Report</button></div>"
+            commentEl.innerHTML += "<p class='comment-content'>"+comment.value+"</p>"
+            c.appendChild(commentEl);
+            if(comments){
+                comments.push({
+                    id: userId,
+                    content: comment.value
+                })
+            }
+            else{
+                comments = [{
+                    id: userId,
+                    content: comment.value
+                }]
+            }
+            posting.forEach( t => {
+                if(t.title === title){
+                    t.comment = comments;
+                }
             })
-
+            comment.value = '';
+            store.setItem('postings',JSON.stringify(posting));
+            console.log(store.getItem('postings'));
         })
 
          /* Report button */
@@ -213,8 +245,8 @@
                                         data-bs-toggle='modal' data-bs-target='#exampleModal' style='color: steelblue'>\
                                     <img src='../statics/person.png' alt='This is a image of person' width='100'/>\
                                     <div class='profile-info'>\
-                                        <div>"+id+"</div>\
-                                        <div><span id='points'>100</span> points</div>\
+                                        <div>"+userId+"</div>\
+                                        <div><span id='points'>"+userPoint+"</span> points</div>\
                                     </div>\
                                 </button>";
                 let btn_profileEl = document.createElement('div');
