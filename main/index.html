@@ -157,9 +157,7 @@
         }
 
         // Put coin into piggy bank
-        function applyforbuy(idx) {
-            let postings = JSON.parse(window.localStorage.getItem('postings'));
-            console.log(postings);
+        function applyforbuy(idx, postings) {
             const btn_buy = document.querySelector("#btn-buy-"+idx);
             const max_people = postings[idx].max;
             btn_buy.addEventListener('click', () => {
@@ -198,7 +196,9 @@
             let appliant = posting.appliant;
             let max = posting.max;
 
-            return "<div class='border rounded m-4 p-2 shadow'>\
+            currentTitle = idx;
+
+            return "<div class='border rounded m-4 p-2 shadow' onclick='showpost()'>\
                         <nav class='navbar bg-light mb-2 rounded'>\
                             <div class='container-fluid'>\
                                 <a class='navbar-brand fs-3'>"+title+"</a>\
@@ -256,6 +256,7 @@
         // List postings on body
         function listPost(postings)
         {
+            postlist = postings
             for(let i=0; i<postings.length; i++){
                 posting_info = postings[i];
                 let post = document.createElement('div');
@@ -279,7 +280,6 @@
 
         // Default status : clicked all tab
         window.addEventListener('load', () => clickCategory());
-
 
     </script>
 </body>

@@ -9,91 +9,116 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
-    
-    <title>Web Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+    </style>
+
+    <title>GGH | Posting</title>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="head">
+        <div class="d-flex flex-row p-2 bg-steel">
             <!-- Web Page Name -->
-            <h1 class="webname">
-                <span><img src="./statics/piggy-coin.png" alt="This is a image of piggy-coin" width="100" height="100"/></span>
-                Gong-Gu-Hae
-            </h1>
-            <!-- My Profile -->
-            <button type="button" class="btn btn-success profile">
-                <img src="./statics/person.png" alt="This is a image of person" width="100"/>
-                <div class="profile-info">
-                    <!-- My ID -->
-                    <div>abcdefg</div>
-                    <!-- My Points -->
-                    <div>9999 points</div>
+            <button type="button" class="btn bg-steel p-0 me-2 d-flex flex-row flex-grow-1 rounded webname">
+                <img src="../statics/piggy-coin.png" alt="This is a image of piggy-coin" width="150" height="150"/>
+                <div>
+                    <h1>GGH</h1>
+                    <div>Gong-Gu-Hae</div>
                 </div>
             </button>
+            <div id="btn-header"></div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Want to charge points? </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <input id="charge-coin" type="text" class="form-control" placeholder="ex. 10000">
+                        </div>          
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="btn-charge" type="button" class="btn btn-primary" data-bs-dismiss="modal">Charge</button>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
         <!-- Category -->
-        <ul class="nav nav-tabs bg-light">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page">식품</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled">의류/잡화</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled">생활용품</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled">기프티콘</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled">기타</a>
-            </li>
-          </ul>
+        <nav>
+            <div class="nav nav-tabs bg-steel" id="nav-tab" role="tablist">
+                <button class="nav-link active" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">전체</button>
+                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">식품</button>
+                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">의류</button>
+                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">도서</button>
+                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">생활용품</button>
+                <!-- Writing button -->
+                <div id="btn-write" class="d-flex flex-row-reverse flex-grow-1"></div>
+            </div>
+        </nav>
     </header>
     <!-- Body -->
     <div>
         <!-- Posting Box-->
         <div class="posting">
-            <nav class="navbar bg-light">
+            <nav class="navbar bg-light posting-title">
                 <div class="container-fluid">
                     <!-- Posting Title -->
                     <a class="navbar-brand">게시글</a>
                     <form class="d-flex" style="align-items: center;">
                         <!-- Writer Name --> 
-                        <div class="posting-writer">abcdefg</div>
+                        <div class="posting-writer"></div>
                         <!-- Report Button -->
-                        <button type="button" class="btn btn-outline-danger"><i class="bi bi-bell"></i> Report</button>
+                        <button type="button" class="btn btn-outline-danger btn-report" onclick="Reportmodal()"><i class="bi bi-bell"></i> Report</button>
                     </form>
                 </div>
               </nav>
             <div>
                 <div class="posting-content">
                     <!-- Item -->
-                    <div class="content-info">
-                        <p>기한 : 2022년 12월 31일 11:59분 까지</p>
-                        <p>물건 : 돼지고기</p>
-                        <p>사이트 : <span><a href="http://browse.gmarket.co.kr/list?category=200001217">gmarket</a></span></p>
-                        <div class="site-info"></div>
-                        <p>장소/시간 : 어디어디/ 몇년몇월몇일몇시몇분</p>
-                    </div>
+                    <div class="content-info"></div>
                     <div class="content-coin">
-                        <p>2/ 4명</p>
                         <!-- Piggy Bank -->
                         <div class="pig">
                             <div class="pig-coin"></div>
-                            <img src="./statics/piggy-coin-empty.png" alt="This is a image of piggy-coin-empty" width="100%" height="100%" style="position: absolute; top: 0"/>
+                            <img src="../statics/piggy-coin-empty.png" alt="This is a image of piggy-coin-empty" width="100%" height="100%" style="position: absolute; top: 0"/>
                         </div>
                         <button type="button" class="btn btn-warning"> 살래요! </button>
                     </div>
                 </div>
             </div>
+
+            <div class="m-1">
+                <div class="input-group mb-3">
+                    <input id="comment-content" type="text" class="form-control" placeholder="Comment">
+                    <button id="btn-comment" class="btn btn-outline-secondary" type="button">댓글 남기기</button>
+                </div>
+                <div id="comments">
+                    <div class="comment">
+                        <div class="comment-writer">
+                            <div class="writer-name"><p class="comment-writer-name"></p></div>
+                            <!-- Report Button -->
+                            <button class="btn btn-outline-danger btn-report" type="button" onclick="Reportmodal()"><i class="bi bi-bell"></i> Report</button>    
+                        </div>
+                        <p class="comment-content">hi hello 안녕 </p>
+                    </div>
+                </div>
+            </div>
+        
         </div>
     </div>
     <!-- Footer -->
-    <footer style="background-color: gray;">
-        <div style="text-align: center; padding: 30px;">
-            OSS-TEAM7
+    <footer>
+        <div class="bg-secondary d-flex justify-content-center h-100 p-4 m-0">
+            <a href="https://github.com/nohkyungbin/OSS_team7" class="text-white text-uppercase text-decoration-none">
+                <i class="bi bi-github"></i> OSS team7
+            </a>
         </div>
     </footer>
 
@@ -102,6 +127,109 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
     <script>
+        const store = window.localStorage;
+        const posting = JSON.parse(store.getItem('postings'));
+        const title = "아아아ㅏ아아"; // store.getItem('currentPost');
+        const userId = store.getItem('id');
+        const userPoint = store.getItem('point');
+        let post = {};
+
+        posting.forEach(p => {
+            if(p.title === title){
+                post = p;
+                return false;
+            }
+        })
+
+        console.log(post);
+        const postId = post.id;
+        const des = post.des;
+        const finish = post.finish.replace('T', ' ');
+        const cate = post.cate;
+        const place = post.place;
+        const time = post.time.replace('T', ' ');
+        const product = post.item;
+        const url = post.url;
+        const max = post.max;
+        const appliant = post.appliant;
+        const comments = post.comment;
+        
+        document.querySelector(".posting-writer").innerHTML = postId;
+        document.querySelector(".comment-writer-name").innerHTML = userId;
+        
+        const postContent = "<p>기한 : " + finish + "</p>\
+                            <p>설명: " + des + " </p>\
+                            <p>상품명 : " + product + "</p>\
+                            <p>거래 장소 : " + place + "</p>\
+                            <p>거래 시간 : " + time + "</p>\
+                            <p>사이트 : <span><a href='" + url + "'>gmarket</a></span></p>"
+        document.querySelector(".content-info").innerHTML = postContent;
+        document.querySelector(".content-coin").innerHTML = "<p><span>" + appliant + "</span>/ " + max + "명</p>";
+        
+        /* Comment */
+        const btn_comment = document.querySelector("#btn-comment");
+        let c = document.querySelector("#comments");
+        btn_comment.addEventListener('click', () => {
+            let comment = document.querySelector("#comment-content");
+            if(!comment.value) {
+                alert("1글자 이상 입력해주세요! 😅");
+                return;
+            }
+            let commentEl = document.createElement("div");
+            comments.forEach( c => {
+                commentEl.classList.add("comment");
+                commentEl.innerHTML = "<div class='comment-writer'> <div class='writer-name'><p>" + c.id + "</p></div><button class='btn btn-outline-danger btn-report' type='button' onclick='Reportmodal()'><i class='bi bi-bell'></i> Report</button></div>"
+                commentEl.innerHTML += "<p class='comment-content'>"+comment.value+"</p>"
+                c.appendChild(commentEl);
+                comment.value = '';
+            })
+
+        })
+
+         /* Report button */
+        function Reportmodal(){
+            alert("🚨 신고 접수 되었습니다! 🚨");
+        }
+
+        function islogin(login){
+            const btn_header = document.querySelector('#btn-header');
+
+            if(!login){
+                let btn_login = "<button id='btn-login' type='button' \
+                                        class='btn btn-light d-flex flex-row align-items-center rounded me-2'\
+                                        style='color: steelblue'>\
+                                    <img src='../statics/person.png' alt='This is a image of person' width='100'/>\
+                                    <div class='profile-info'>\
+                                        <div>Login</div>\
+                                    </div>\
+                                </button>";
+                let btn_loginEl = document.createElement('div');
+                btn_loginEl.innerHTML = btn_login;
+                btn_header.appendChild(btn_loginEl);
+                
+            } else {
+                let btn_profile ="<button id='btn-profile' type='button'\
+                                        class='btn btn-light d-flex flex-row align-items-center rounded me-2'\
+                                        data-bs-toggle='modal' data-bs-target='#exampleModal' style='color: steelblue'>\
+                                    <img src='../statics/person.png' alt='This is a image of person' width='100'/>\
+                                    <div class='profile-info'>\
+                                        <div>"+id+"</div>\
+                                        <div><span id='points'>100</span> points</div>\
+                                    </div>\
+                                </button>";
+                let btn_profileEl = document.createElement('div');
+                btn_profileEl.innerHTML = btn_profile;
+                btn_header.appendChild(btn_profileEl);
+
+                const btn_write = document.querySelector('#btn-write')
+                let btn_writing = "<button class='btn btn-secondary me-2 mb-2' type='button'><i class='bi bi-pencil-fill'></i></button>"
+                let btn_writingEl = document.createElement('div');
+                btn_writingEl.innerHTML = btn_writing;
+                btn_write.appendChild(btn_writingEl);
+
+            }
+        }
+        islogin(true);
 
     </script>
 </body>

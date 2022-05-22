@@ -113,11 +113,20 @@
                 </div>
             </div>
             <div class="col-4">
-                <label for="url">사이트</label>
+                <label for="max">모집 인원</label>
                 <div class="input-group">
-                    <input class="form-control" placeholder="url of product info" id="url">
+                    <input class="form-control" placeholder="max people" id="max">
                 </div>
             </div>    
+        </div>
+        
+        <div class="row">
+            <div class="col-8 offset-2">
+                <label for="url">상품 사이트</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="url of product info" id="url">
+                </div>  
+            </div>
         </div>
 
         <div class="row">
@@ -215,6 +224,7 @@
             let timeMeet = document.getElementById("timeMeet").value;
             let product = document.getElementById("product").value;
             let url = document.getElementById("url").value;
+            let max = document.getElementById("max").value;
 
             postings.push({
                 id: userId,
@@ -227,13 +237,11 @@
                 item: product,
                 url: url,
                 appliant: 0,
-                max: 10,
+                max: max
             });
             
             store.setItem('postings', JSON.stringify(postings));
 
-
-            console
         }
     </script>
 </body>
