@@ -5,6 +5,7 @@
 ## 설명
 
 기존에 공동구매를 할 때, 사람을 모으기 힘들다는 것과 돈을 주고 받을 때 신뢰가 가지 않는다는 문제점이 있다.
+
 'GGH' 사이트는 구매를 원하는 사람이 게시물을 올려 구인 후 구매를 진행한다.
  1. 게시물을 올리면 저금통 기능을 하는 동전 그림이 나타남
  2. '살래요!' 버튼을 누르면 자신의 포인트를 저금통에 채우고 공동구매에 참여 완료
@@ -27,12 +28,21 @@
 
 ## 스크린샷
 
+홈페이지
 ![mainpage](./statics/capture/main.png)
+
+로그인 페이지
 ![loginpage](./statics/capture/login.png)
+
+회원가입 페이지
 ![signup](./statics/capture/certi.png)
 ![signup](./statics/capture/signup.png)
 ![signup](./statics/capture/done.png)
+
+게시글 작성 페이지
 ![postingpage](./statics/capture/posting.png)
+
+게시글 페이지
 ![postpage](./statics/capture/post.png)
 
 ## 버전
