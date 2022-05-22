@@ -9,26 +9,46 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+    </style>
     
     <title>Web Page</title>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="head">
+        <div class="d-flex flex-row p-2 bg-steel">
             <!-- Web Page Name -->
-            <h1 class="webname">
-                <span><img src="../statics/piggy-coin.png" alt="This is a image of piggy-coin" width="100" height="100"/></span>
-                Gong-Gu-Hae
-            </h1>
-            <!-- My Profile -->
-            <button type="button" class="btn btn-success profile">
-                <img src="../statics/person.png" alt="This is a image of person" width="100"/>
-                <div class="profile-info">
-                    <div id="userId"></div>
-                    <div id="userPoint"></div>
+            <button type="button" class="btn bg-steel p-0 me-2 d-flex flex-row flex-grow-1 rounded webname">
+                <img src="../statics/piggy-coin.png" alt="This is a image of piggy-coin" width="150" height="150"/>
+                <div>
+                    <h1>GGH</h1>
+                    <div>Gong-Gu-Hae</div>
                 </div>
             </button>
+            <div id="btn-header"></div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Want to charge points? </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <input id="charge-coin" type="text" class="form-control" placeholder="ex. 10000">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="btn-charge" type="button" class="btn btn-primary" data-bs-dismiss="modal">Charge</button>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
     </header>
     <!-- Body -->
@@ -129,16 +149,60 @@
     </div> 
     <!-- Footer -->
     <footer>
-        <div style="text-align: center; padding: 30px;">
-            OSS-TEAM7
+        <div class="bg-secondary d-flex justify-content-center h-100 p-4 m-0">
+            <a href="https://github.com/nohkyungbin/OSS_team7" class="text-white text-uppercase text-decoration-none">
+                <i class="bi bi-github"></i> OSS team7
+            </a>
         </div>
     </footer>
+    
 
     <!-- Optional JavaScript; choose one of the two! -->    
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
     <script>
+        // Show Login button or Profile
+        function islogin(login){
+            const btn_header = document.querySelector('#btn-header');
+
+            if(!login){
+                let btn_login = "<button id='btn-login' type='button' \
+                                        class='btn btn-light d-flex flex-row align-items-center rounded me-2'\
+                                        style='color: steelblue'>\
+                                    <img src='../statics/person.png' alt='This is a image of person' width='100'/>\
+                                    <div class='profile-info'>\
+                                        <div>Login</div>\
+                                    </div>\
+                                </button>";
+                let btn_loginEl = document.createElement('div');
+                btn_loginEl.innerHTML = btn_login;
+                btn_header.appendChild(btn_loginEl);
+
+                const btn = document.querySelector("#btn-login");
+                btn.addEventListener('click', () => {
+                  location.href="../login.html";
+                });
+
+            } else {
+                let btn_profile ="<button id='btn-profile' type='button'\
+                                        class='btn btn-light d-flex flex-row align-items-center rounded me-2'\
+                                        data-bs-toggle='modal' data-bs-target='#exampleModal' style='color: steelblue'>\
+                                    <img src='../statics/person.png' alt='This is a image of person' width='100'/>\
+                                    <div class='profile-info'>\
+                                        <div>abcdefg</div>\
+                                        <div><span id='points'>100</span> points</div>\
+                                    </div>\
+                                </button>";
+                let btn_profileEl = document.createElement('div');
+                btn_profileEl.innerHTML = btn_profile;
+                btn_header.appendChild(btn_profileEl);
+
+            }
+        }
+        
+        islogin(window.localStorage.getItem('login'));
+
         const store = window.localStorage;
         const userId = store.getItem('id');
         window.addEventListener("load", () => {

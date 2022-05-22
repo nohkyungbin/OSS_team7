@@ -65,56 +65,7 @@
         </nav>
     </header>
     <!-- Body -->
-    <div id="container">
-        <!-- Posting Box-->
-        <div class="border rounded m-4 p-2 shadow">
-            <!-- Posting header  -->
-            <nav class="navbar bg-light mb-2 rounded">
-            </nav>
-            <!-- Posting body -->
-            <div>
-                <div class="d-flex flex-row">
-                    <!-- Item info -->
-                    <div class="w-100 p-4 content-info">
-                        <form>
-                            <div class="row mb-3">
-                                <label for="inputEmail3" class="col-sm-2 col-form-label">기한</label>
-                                <div class="col-sm-10 d-flex align-items-center"> ~ <span>2022년 12월 31일 11:59분</span> 까지 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputEmail3" class="col-sm-2 col-form-label">상품명</label>
-                                <div class="col-sm-10 d-flex align-items-center"> 돼지고기 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputEmail3" class="col-sm-2 col-form-label">거래 시간</label>
-                                <div class="col-sm-10 d-flex align-items-center"> 2023년 1월 1일 12시 30분</div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputEmail3" class="col-sm-2 col-form-label">거래 장소</label>
-                                <div class="col-sm-10 d-flex align-items-center"> 성균관대 학술정보관 5층 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputEmail3" class="col-sm-2 col-form-label">사이트</label>
-                                <div class="col-sm-10 d-flex align-items-center">
-                                    <a href="http://browse.gmarket.co.kr/list?category=200001217">http://browse.gmarket.co.kr/list?category=200001217</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- Buying information  -->
-                    <div class="d-flex flex-column align-items-center">
-                        <p class="mt-3"><span id="buy-people-">0</span> / <span id="max-people-">10</span>명</p>
-                        <!-- Piggy Bank -->
-                        <div class="d-flex flex-column-reverse pig mb-4">
-                            <div id="pig-coin-" class="pig-coin w-100"></div>
-                            <img src="../statics/piggy-coin-empty.png" alt="This is a image of piggy-coin-empty" width="100%" height="100%" style="position: absolute; top: 0"/>
-                        </div>
-                        <button id="btn-buy-" type="button" class="btn btn-warning"> 살래요! </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="container"></div>
     <!-- Footer -->
     <footer>
         <div class="bg-secondary d-flex justify-content-center h-100 p-4 m-0">
@@ -152,18 +103,31 @@
                 });
 
             } else {
+                const id = window.localStorage.getItem('id');
+                const point = window.localStorage.getItem('point');
                 let btn_profile ="<button id='btn-profile' type='button'\
                                         class='btn btn-light d-flex flex-row align-items-center rounded me-2'\
                                         data-bs-toggle='modal' data-bs-target='#exampleModal' style='color: steelblue'>\
                                     <img src='../statics/person.png' alt='This is a image of person' width='100'/>\
                                     <div class='profile-info'>\
-                                        <div>abcdefg</div>\
-                                        <div><span id='points'>100</span> points</div>\
+                                        <div>"+id+"</div>\
+                                        <div><span id='point'>"+point+"</span> points</div>\
                                     </div>\
                                 </button>";
                 let btn_profileEl = document.createElement('div');
                 btn_profileEl.innerHTML = btn_profile;
                 btn_header.appendChild(btn_profileEl);
+
+                // When click profile button, Charge points
+                const btn_charge = document.querySelector('#btn-charge');
+                btn_charge.addEventListener('click', () => {
+                    let charge = document.querySelector('#charge-coin');
+                    let pointEl = document.querySelector('#point');
+                    let npoint =  Number(pointEl.innerText) + Number(charge.value);
+                    pointEl.innerText = npoint;
+                    window.localStorage.setItem('point', npoint);
+                    charge.value = '';
+                });
 
                 const btn_write = document.querySelector('#btn-write')
                 let btn_writing = "<button class='btn btn-secondary me-2 mb-2' type='button'><i class='bi bi-pencil-fill'></i></button>"
@@ -171,25 +135,15 @@
                 btn_writingEl.innerHTML = btn_writing;
                 btn_write.appendChild(btn_writingEl);
 
+                // When click write button, Move to post page
+                btn_write.addEventListener('click', () => {
+                    location.href = "../post/index.html";
+                });
+
             }
         }
         
-        islogin(window.localStorage.getItem('login'));
-
-        // When click write button, Move to post page
-        var write = document.querySelector("#btn-write");
-        write.addEventListener('click', () => {
-          location.href = "../post/index.html";
-        });
-
-        // When click profile button, Charge points
-        const btn_charge = document.querySelector('#btn-charge');
-        btn_charge.addEventListener('click', () => {
-            let charge = document.querySelector('#charge-coin');
-            let points = document.querySelector('#points');
-            points.innerText = Number(points.innerText) + Number(charge.value);
-            charge.value = '';
-        });
+        islogin(JSON.parse(window.localStorage.getItem('login')));
 
         // When click report button, Alert report
         function report_btn()
@@ -205,19 +159,29 @@
         // Put coin into piggy bank
         function applyforbuy(idx, postings) {
             const btn_buy = document.querySelector("#btn-buy-"+idx);
-            let pig_coin = document.querySelector("#pig-coin-"+idx);
-            const max_people = Number(document.querySelector("#max-people-"+idx).innerText);
+            const max_people = postings[idx].max;
             btn_buy.addEventListener('click', () => {
-                let people = document.querySelector("#buy-people-"+idx);
-                if(Number(people.innerText) == max_people){
+                let peoplEl = document.querySelector('#buy-people-'+idx);
+                let npeople = postings[idx].appliant;
+                if(npeople == max_people){
                     alert("인원모집이 완료되어 신청할 수 없습니다 ☹️");
                     return;
                 }
-                people.innerText = Number(people.innerText) + 1;
-                postings[idx].appliant++;
-                pig_coin.style.height = String(Number(people.innerText) / max_people * 100) + "%";
-                console.log(pig_coin.className);
+                npeople += 1;
+                peoplEl.innerText = npeople;
+                postings[idx].appliant = npeople;
+                window.localStorage.setItem('postings', JSON.stringify(postings));
+                drawpigcoin(idx);
             });
+        }
+
+        // Draw piggy bank
+        function drawpigcoin(idx){
+            let postings = JSON.parse(window.localStorage.getItem('postings'));
+            let post = postings[idx];
+            let pig_coin = document.querySelector("#pig-coin-"+idx);
+            pig_coin.style.height = String(post.appliant / post.max * 100) + "%";
+            console.log(pig_coin.style.height);
         }
 
         // Posting box
@@ -229,8 +193,8 @@
             let item = posting.item;
             let location = posting.place;
             let site = posting.url;
-            let appliant = 0;
-            let max = 10;
+            let appliant = posting.appliant;
+            let max = posting.max;
 
             currentTitle = idx;
 
@@ -299,7 +263,8 @@
                 post.innerHTML = postingbox(i, posting_info);
                 container.appendChild(post);
                 report_btn();
-                applyforbuy(i, postings);
+                applyforbuy(i);
+                drawpigcoin(i);
             }
         }
         
@@ -307,13 +272,11 @@
         function clickCategory(category)
         {
             let postings = JSON.parse(window.localStorage.getItem("postings"));
+            if(!postings) return;
             while(container.hasChildNodes()) container.removeChild(container.firstChild);
             if(category) postings = postings.filter(post => post.cate === category)
-            console.log(postings);
             listPost(postings);
         }
-
-        applyforbuy('');
 
         // Default status : clicked all tab
         window.addEventListener('load', () => clickCategory());
